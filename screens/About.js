@@ -42,48 +42,53 @@ export default function About({ navigation }) {
   
   const styles = StyleSheet.create({
     scrollView: {
-        flex: 1,
-        height: "100%",
-      },
-      header: {
-        flex: 1,
-        width: "100%",
-        height: ScreenHeight,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "rgba(0,0,0,0.5)",
-      },
-      overlay: {
-        flex: 1,
-        backgroundColor: "rgba(0,0,0,0.5)",
-      },
-      homeContainer: {
-        flex: 1,
-        padding: 20,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      },
-      aboutParagraph : {
-          color:"black",
-          paddingTop: 30,
-          paddingBottom : 20,
-          paddingLeft : 20,
-          paddingRight : 20,
-      },
-      font_32:{
-          fontSize : 32,
-          fontWeight : "bold",
-          paddingLeft : 20,
-          paddingRight : 20,
-      },
-      aboutParagraph2 : {
-        color:"black",
-        paddingTop: 10,
-        paddingBottom : 20,
-        paddingLeft : 20,
-        paddingRight : 20,
+      flex: 1,
+      height: "100%",
+    },
+    header: {
+      flex: 1,
+      width: "100%",
+      height: ScreenHeight,
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "rgba(0,0,0,0.5)",
+    },
+    overlay: {
+      flex: 1,
+      backgroundColor: "rgba(0,0,0,0.5)",
+    },
+    homeContainer: {
+      flex: 1,
+      padding: 20,
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    aboutParagraph: {
+      color: "black",
+      paddingTop: 30,
+      paddingBottom: 20,
+      paddingLeft: 20,
+      paddingRight: 20,
+      fontFamily: "font-medium",
+      textAlign: 'justify'
+    },
+    font_32: {
+      marginTop: 20,
+      fontSize: 32,      
+      paddingLeft: 20,
+      paddingRight: 20,
+      fontFamily: "font-bold",
+    },
+    aboutParagraph2: {
+      color: "black",
+      paddingTop: 10,
+      paddingBottom: 20,
+      paddingLeft: 20,
+      paddingRight: 20,
+      fontFamily: "font-medium",
+      textAlign: 'justify'
     },
   });
   
