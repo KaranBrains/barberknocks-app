@@ -59,121 +59,77 @@ export default function Signup({ navigation }) {
   }
   
   const styles = StyleSheet.create({
-     scrollView: {
-        flex: 1,
-        height: "100%",
-      },
-      header: {
-        flex: 1,
-        width: "100%",
-        minHeight: ScreenHeight,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#ffffff",
-      },
-      Signupcard : {
-        padding: 20,
-        width: "90%",
-        minHeight: (ScreenHeight/2),
-        backgroundColor: "white",
-        marginTop: 40,
-      },
-      titleText : {
-        fontFamily: "font-bold",
-        fontSize: 40,
-        color: "#420a83",
-        textAlign: "center",
-      }   ,
-      button:{
-        backgroundColor: "#730fe4" ,
-        paddingLeft: 30,
-        paddingRight: 30,
-        paddingTop: 12,
-        paddingBottom : 12,
-      },
-      buttonText:{
-        fontFamily: "font-demi",
-        fontSize: 16,
-      },
-      buttonDiv:{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      },
-      input:{
-        backgroundColor: "#f3effd",
-        paddingTop: 10,
-        paddingBottom : 10,
-        paddingLeft : 20,
-        paddingRight : 20,
-        height: 50,
-        marginTop:5,
-        borderWidth: 1,
-        borderColor: "#ced4da",
-        borderStyle: "solid"
-      },
-      inputDiv:{
-        paddingTop: 30,
-        paddingBottom: 30
-      },
-      touchbutton:{
-        paddingTop: 15,
-        color: "#420a83",
-        fontSize: 16,
-        fontFamily: "font-demi",
-        marginBottom:40
-      },
-      paddingTop:{
-        paddingTop:10
-      },
-      stepDiv:{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        marginBottom: 10,
-        width:"100%"
-      },
-      stepButton1:{
-        borderRadius : 48,
-        width: 48,
-        height: 48,
-        backgroundColor: "#420a83"
-      }, 
-      stepButton2:{
-        borderRadius : 48,
-        width: 48,
-        height: 48,
-        backgroundColor: "#e0e0e0"
-      },
-      stepDivConnect: {
-        width: "60%",
-        height: 1,
-        backgroundColor: "#420a83",
-        marginLeft: 10,
-        marginRight:10,
-      },
-      stepTextDiv:{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        marginBottom: 30,
-        width:"100%",
-      },
-      stepConnect:{
-        width: "60%",
-        height: 1,
-        backgroundColor: "#ffffff",
-        marginLeft: 8,
-        marginRight:8,
-      },
-      stepText1and2:{
-        color: "#420a83",
-        fontSize: 16,
-        fontFamily: "font-demi"
-      }
+    scrollView: {
+      flex: 1,
+      height: "100%",
+    },
+    header: {
+      flex: 1,
+      width: "100%",
+      minHeight: ScreenHeight,
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "rgba(0,0,0,0.5)",
+    },
+    Signupcard: {
+      padding: 20,
+      width: "90%",
+      minHeight: ScreenHeight / 2,
+      backgroundColor: "white",
+      marginTop: 40,
+    },
+    titleText: {
+      fontFamily: "font-bold",
+      fontSize: 30,
+      color: "#420a83",
+      textAlign: "center",
+    },
+    button: {
+      backgroundColor: "#730fe4",
+    },
+    buttonText: {
+      fontFamily: "font-demi",
+      fontSize: 16,
+    },
+    inputHeading: {
+      color: "#420a83",
+      fontSize: 18,
+      fontFamily: "font-demi",
+    },
+    input: {
+      backgroundColor: "#f3effd",
+      paddingTop: 2,
+      paddingBottom: 2,
+      paddingLeft: 20,
+      paddingRight: 20,
+      height: 40,
+      borderRadius: 5,
+      marginTop: 5,
+      borderWidth: 1,
+      borderColor: "#ced4da",
+      borderStyle: "solid",
+    },
+    passwordDiv: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingTop: 20,
+    },
+    inputDiv: {
+      paddingTop: 30,
+      paddingBottom: 30,
+    },
+    touchbutton: {
+      paddingTop: 15,
+      color: "#ffffff",
+      fontSize: 18,
+      fontFamily: "font-demi",
+      marginBottom: 40,
+    },
+    paddingTop: {
+      paddingTop: 10,
+    },
   });
 
   //Signup

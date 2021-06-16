@@ -13,6 +13,9 @@ import Carousel from "react-native-snap-carousel";
 import Service from "../components/Home/Service";
 import Stylist from "../components/Home/Stylist";
 import Feature from "../components/Home/Features";
+import Faq from "../components/Home/Faq";
+import Footer from "../components/Footer";
+import { connect } from "react-redux";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 const renderItem = () => (
@@ -43,7 +46,7 @@ const video = [
     title: "",
   },
 ];
-export default function Home({ navigation }) {
+function Home({ navigation }) {
   return (
     <ScrollView>
       <ImageBackground
@@ -77,6 +80,8 @@ export default function Home({ navigation }) {
         renderItem={renderItem}
         layout={"default"}
       />
+      <Faq />
+      <Footer />
     </ScrollView>
   );
 }
@@ -121,3 +126,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+const mapStateToProps = (state) => {
+  const { friends } = state;
+  console.log("abc");
+  console.log(friends);
+  return { friends };
+};
+
+export default connect(mapStateToProps)(Home);
