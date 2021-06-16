@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet } from "react-native";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./redux/reducer";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import DrawerNavigator from "./routes/drawerNavigator";
-import Header from "./components/Header";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -12,19 +14,22 @@ const getFonts = () =>
     "font-medium": require("./assets/fonts/AvenirNextLTPro-Medium.otf"),
     "font-regular": require("./assets/fonts/AvenirNextLTPro-Regular.otf"),
   });
+const store = createStore(reducer);
 
-export default function App() {
+function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   if (fontsLoaded) {
     return (
       <React.Fragment>
-        <DrawerNavigator />       
+        <Provider store={store}>
+          <DrawerNavigator />
+        </Provider>
       </React.Fragment>
     );
   } else {
     return (
       <AppLoading
-        startAsync={getFonts}        
+        startAsync={getFonts}
         onError={(err) => console.log(err)}
         onFinish={() => setFontsLoaded(true)}
       />
@@ -38,3 +43,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 });
+
+export default App;
