@@ -43,6 +43,7 @@ export default function Login({ navigation }) {
              <TextInput
              style={styles.input}
              textContentType="password"
+             secureTextEntry={true}
              />
             </View>
            <Button
