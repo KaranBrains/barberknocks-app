@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -15,7 +15,8 @@ import Stylist from "../components/Home/Stylist";
 import Feature from "../components/Home/Features";
 import Faq from "../components/Home/Faq";
 import Footer from "../components/Footer";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { allService } from "../redux/actions/service";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 const renderItem = () => (
@@ -46,7 +47,7 @@ const video = [
     title: "",
   },
 ];
-function Home({ navigation }) {
+function Home({ navigation }) {  
   return (
     <ScrollView>
       <ImageBackground
@@ -127,11 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => {
-  const { friends } = state;
-  console.log("abc");
-  console.log(friends);
-  return { friends };
-};
-
-export default connect(mapStateToProps)(Home);
+export default Home;
