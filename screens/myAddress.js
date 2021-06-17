@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Button, Card } from "react-native-elements";
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function MyBookings({ navigation }) {
+export default function MyAddress({ navigation }) {
   return (
     <ScrollView>
       <View style={{ ...styles.header }}>

@@ -6,6 +6,9 @@ import About from "./aboutStack"
 import Login from './authStack';
 import Signup from './signup'
 import Contact from "../screens/Contact";
+import UserProfile from "./userProfile";
+import MyAddress from "./address";
+import MyBookings from "./myBookings";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,6 +21,9 @@ function DrawerNavigator() {
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Signup" component={Signup} />
         <Drawer.Screen name="Contact" component={Contact} />
+        <Drawer.Screen name="UserProfile" component={UserProfile} />
+        <Drawer.Screen name="MyAddress" component={MyAddress} />
+        <Drawer.Screen name="MyBookings" component={MyBookings} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

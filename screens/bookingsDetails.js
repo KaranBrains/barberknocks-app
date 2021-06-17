@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function Signup({ navigation }) {
+export default function BookingsDetails({ navigation }) {
     return (
        <ScrollView>
           <View style={{ ...styles.header}}>

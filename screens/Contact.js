@@ -12,7 +12,7 @@ import {
 import { Button } from "react-native-elements";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function ForgotEmail({ navigation }) {
+export default function Contact({ navigation }) {
   const handlePress = () => {
     navigation.navigate("ForgotOtp");
   };

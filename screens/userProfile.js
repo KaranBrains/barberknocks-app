@@ -13,7 +13,7 @@ import {
 import { Button, Card } from "react-native-elements";
 import { globalStyles } from "../styles/global";
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function Signup({ navigation }) {
+export default function UserProfile({ navigation }) {
   return (
     <ScrollView>
       <View style={{ ...styles.Signupcard }}>

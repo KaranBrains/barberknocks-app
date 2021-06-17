@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Button, Card } from "react-native-elements";
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function Signup({ navigation }) {
+export default function VerifyEmail({ navigation }) {
     return (
        <ScrollView>
           <View style={{ ...styles.header }}>
