@@ -24,7 +24,7 @@ export const globalStyles = StyleSheet.create({
   },
   heading: {
     fontFamily: "font-bold",
-    fontSize: 22,
+    fontSize: 20,
     textAlign: "center",
     color: "#333",
   },

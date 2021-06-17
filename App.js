@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import reducer from "./redux/reducer";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import DrawerNavigator from "./routes/drawerNavigator";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import reducers from "./redux/reducer";
+
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
+
 
 const getFonts = () =>
   Font.loadAsync({
@@ -14,7 +18,6 @@ const getFonts = () =>
     "font-medium": require("./assets/fonts/AvenirNextLTPro-Medium.otf"),
     "font-regular": require("./assets/fonts/AvenirNextLTPro-Regular.otf"),
   });
-const store = createStore(reducer);
 
 function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
