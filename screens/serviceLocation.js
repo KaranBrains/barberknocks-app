@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -8,14 +8,23 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  Image,
 } from "react-native";
-import { Button } from "react-native-elements";
+import { Button, Card } from "react-native-elements";
+import { useDispatch, useSelector } from "react-redux";
+import { allService } from "../redux/actions/service";
+import { globalStyles } from "../styles/global";
 
-let ScreenHeight = Dimensions.get("window").height - 70;
-export default function Contact({ navigation }) {
+let ScreenHeight = Dimensions.get("window").height - 40;
+export default function ServiceLocation({ navigation }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(allService());
+  }, []);
   const handlePress = () => {
-    navigation.navigate("ForgotOtp");
+    navigation.navigate("Forgot");
   };
+  const allServices = useSelector((state) => state.service?.AllData?.services);
   return (
     <ScrollView>
       <ImageBackground
@@ -23,52 +32,26 @@ export default function Contact({ navigation }) {
         style={{ ...styles.header }}
       >
         <View style={{ ...styles.Logincard }}>
-          <Text style={{ ...styles.titleText }}>Get in Touch</Text>
-          <Text
-            style={{
-              fontFamily: "font-regular",
-              fontSize: 14,
-              color: "#420a83",
-              marginTop: 7,
-              textAlign: "center",
-            }}
-          >
-            How can we help you out? If you fill out the form below, we will try
-            to get back to you ASAP!
-          </Text>
-          <Text
-            style={{
-              fontStyle: "italic",
-              fontFamily: "font-regular",
-              fontSize: 12,
-              color: "#420a83",
-              textAlign: "center",
-              marginBottom: 20,
-            }}
-          >
-            Fields marked with an asterisk (*) are required.
-          </Text>
           <View style={{ ...styles.inputDiv }}>
-            <Text style={{ ...styles.inputHeading }}>Name</Text>
+            <Text style={{ ...styles.inputHeading }}>Location</Text>
             <TextInput style={styles.input} textContentType="name" />
-          </View>
-          <View style={{ ...styles.inputDiv }}>
-            <Text style={{ ...styles.inputHeading }}>Email</Text>
-            <TextInput style={styles.input} textContentType="emailAddress" />
-          </View>
-          <View style={{ ...styles.inputDiv }}>
-            <Text style={{ ...styles.inputHeading }}>Message</Text>
-            <TextInput
-              style={styles.input}
-              textContentType="none"
-              multiline={true}
-            />
+            <Text style={{ ...styles.inputHeading }}>Services</Text>
+            <View style={styles.serviceCards}>
+              {allServices?.map((service) => (
+                <Card containerStyle={styles.card}>
+                  <Image
+                    source={require("../assets/Barber.png")}
+                    style={styles.serviceImage}
+                  />
+                  <Text style={styles.heading}>{service.name}</Text>
+                </Card>
+              ))}
+            </View>
           </View>
           <Button
-            title="Submit"
+            title="Continue"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
-            onPress={handlePress}
           />
         </View>
       </ImageBackground>
@@ -81,10 +64,38 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
   },
+  card: {
+    backgroundColor: "#eee",
+    width: "40%",
+    alignSelf: "center",
+    borderRadius: 100,
+  },
+  services: {
+    backgroundColor: "#fff",
+    paddingVertical: 50,
+  },
+  serviceImage: {
+    width: 50,
+    height: 50,
+    alignSelf: "center",
+    marginBottom: 10,
+  },
+  serviceCards: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  heading: {
+    fontFamily: "font-demi",
+    fontSize: 16,
+    textAlign: "center",
+    color: "#333",
+  },
   header: {
     flex: 1,
     width: "100%",
-    height: ScreenHeight,
+    minHeight: ScreenHeight,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
@@ -103,8 +114,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    marginTop: 40,
-    marginBottom: 10,
     backgroundColor: "#730fe4",
   },
   buttonText: {
@@ -113,8 +122,9 @@ const styles = StyleSheet.create({
   },
   inputHeading: {
     color: "#420a83",
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "font-demi",
+    marginTop: 20,
   },
   input: {
     backgroundColor: "#f3effd",
@@ -129,7 +139,19 @@ const styles = StyleSheet.create({
     borderColor: "#ced4da",
     borderStyle: "solid",
   },
+  passwordDiv: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: 20,
+  },
   inputDiv: {
-    paddingTop: 10,
+    paddingBottom: 30,
+  },
+  touchbutton: {
+    paddingTop: 15,
+    color: "#ffffff",
+    fontSize: 18,
+    fontFamily: "font-demi",
   },
 });

@@ -15,8 +15,6 @@ import Stylist from "../components/Home/Stylist";
 import Feature from "../components/Home/Features";
 import Faq from "../components/Home/Faq";
 import Footer from "../components/Footer";
-import { useDispatch, useSelector } from "react-redux";
-import { allService } from "../redux/actions/service";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 const renderItem = () => (
@@ -48,6 +46,9 @@ const video = [
   },
 ];
 function Home({ navigation }) {  
+  const handleSubmit = () => {
+    navigation.navigate("serviceLocation");
+  };
   return (
     <ScrollView>
       <ImageBackground
@@ -67,6 +68,7 @@ function Home({ navigation }) {
             title="Book Now"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
+            onPress={handleSubmit}
           />
         </View>
       </ImageBackground>
@@ -82,7 +84,7 @@ function Home({ navigation }) {
         layout={"default"}
       />
       <Faq />
-      <Footer />
+      <Footer navigation={navigation}  />      
     </ScrollView>
   );
 }
