@@ -64,7 +64,7 @@ export default function ServiceLocation({ navigation }) {
             <View style={styles.serviceCards}>
               {allServices?.map((service) => (
                 <Card containerStyle={styles.card}>
-                  <TouchableOpacity onPress={handlePressService(service._id)}>
+                  <TouchableOpacity onPress={()=>{handlePressService(service._id)}}>
                     <Image
                       source={require("../assets/Barber.png")}
                       style={styles.serviceImage}

@@ -16,7 +16,7 @@ export default function VerifyEmail({ navigation }) {
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(verifyEmailOtp(otp,{ navigation }))
+    dispatch(verifyEmailOtp(otp))
     .then(() =>{
       navigation.navigate("VerifyPhone");
     })
@@ -63,7 +63,7 @@ export default function VerifyEmail({ navigation }) {
           </View>
           <View style={{ ...styles.buttonDiv }}>
             <Button
-              onpress={handleSubmit}
+              onPress={handleSubmit}
               title="Continue"
               buttonStyle={styles.button}
               titleStyle={styles.buttonText}
