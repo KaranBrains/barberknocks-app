@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Home";
 import Header from "../components/Header";
+import ServiceLocation from "../screens/serviceLocation";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,17 @@ function Navigator() {
           headerTitle: () => (
             <React.Fragment>
               <Header navigation={navigation} title="BarberKnocks" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="serviceLocation"
+        component={ServiceLocation}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <Header navigation={navigation} title="Service Location" />
             </React.Fragment>
           ),
         })}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -7,14 +7,19 @@ import {
   Text,
   Dimensions,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
 import { Button } from "react-native-elements";
+import { useDispatch } from "react-redux";
+import { contactUs } from "../redux/actions/contact";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function Contact({ navigation }) {
+  const initialState = { name: "", email: "", message: "" };
+  const [formData, setformData] = useState(initialState);
+  const dispatch = useDispatch()
+
   const handlePress = () => {
-    navigation.navigate("ForgotOtp");
+    dispatch(contactUs(formData, navigation));    
   };
   return (
     <ScrollView>
@@ -50,11 +55,45 @@ export default function Contact({ navigation }) {
           </Text>
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Name</Text>
-            <TextInput style={styles.input} textContentType="name" />
+            <TextInput
+
+
+                                        style={styles.input}
+
+
+                                        textContentType="name"
+
+
+                                        onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  name: text,
+                })
+              }
+            
+            
+            />
           </View>
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Email</Text>
-            <TextInput style={styles.input} textContentType="emailAddress" />
+            <TextInput
+             
+             
+              style={styles.input}
+             
+             
+              textContentType="emailAddress"
+             
+             
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  email: text,
+                })
+              }
+           
+           
+            />
           </View>
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Message</Text>
@@ -62,6 +101,12 @@ export default function Contact({ navigation }) {
               style={styles.input}
               textContentType="none"
               multiline={true}
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  message: text,
+                })
+              }
             />
           </View>
           <Button

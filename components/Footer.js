@@ -9,7 +9,10 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
 
-const Footer = () => {
+const Footer = ({ navigation }) => {
+  const handleSubmit = () => {
+    navigation.navigate("serviceLocation");
+  };
   return (
     <View style={styles.container}>
       <SectionList
@@ -63,6 +66,7 @@ const Footer = () => {
           title="Book Now"
           buttonStyle={styles.button}
           titleStyle={styles.buttonText}
+          onPress={handleSubmit}
         />
       </ImageBackground>
     </View>
