@@ -16,8 +16,9 @@ import { allService } from "../redux/actions/service";
 
 let ScreenHeight = Dimensions.get("window").height - 40;
 export default function ServiceLocation({ navigation }) {
-  const initialState = { city: "torronto", service: "" };
+  const initialState = { city: "Torronto", service: "" };
   const [formData, setformData] = useState(initialState);
+  var [isPress, setIsPress] = React.useState(false);
   const [serviceId, setServiceId] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,11 +35,10 @@ export default function ServiceLocation({ navigation }) {
         service: formData.service,
       });
     }
-    navigation.navigate("Slots", {});
   };
   const handlePressService = (id) => {
-    console.log("id");
-    //   setformData({...formData, service:})
+    setIsPress(true);
+    setformData({ ...formData, service: id });
   };
   const allServices = useSelector((state) => state.service?.AllData?.services);
   return (
@@ -52,6 +52,7 @@ export default function ServiceLocation({ navigation }) {
             <Text style={{ ...styles.inputHeading }}>Location</Text>
             <TextInput
               style={styles.input}
+              value={formData.city}
               textContentType="name"
               onChangeText={(text) =>
                 setformData({
@@ -63,8 +64,13 @@ export default function ServiceLocation({ navigation }) {
             <Text style={{ ...styles.inputHeading }}>Services</Text>
             <View style={styles.serviceCards}>
               {allServices?.map((service) => (
-                <Card containerStyle={styles.card}>
-                  <TouchableOpacity onPress={handlePressService(service._id)}>
+                <Card containerStyle={{ ...styles.card }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      handlePressService(service._id);
+                    }}
+                    style={isPress ? styles.border : ""}
+                  >
                     <Image
                       source={require("../assets/Barber.png")}
                       style={styles.serviceImage}
@@ -181,5 +187,11 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 18,
     fontFamily: "font-demi",
+  },
+  border: {
+    borderWidth: 1,
+    borderColor: "#ced4da",
+    borderRadius: 50,
+    padding: 5,
   },
 });
