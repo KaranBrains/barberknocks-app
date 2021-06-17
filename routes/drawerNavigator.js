@@ -5,7 +5,7 @@ import Home from "./stackNavigator";
 import About from "./aboutStack"
 import Login from './authStack';
 import Signup from './signup'
-import Contact from "../screens/Contact";
+import Contact from "./contactStack";
 import UserProfile from "./userProfile";
 import MyAddress from "./address";
 import MyBookings from "./myBookings";

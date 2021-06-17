@@ -12,14 +12,14 @@ import { Button } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import { contactUs } from "../redux/actions/contact";
 
-let ScreenHeight = Dimensions.get("window").height - 70;
+let ScreenHeight = Dimensions.get("window").height;
 export default function Contact({ navigation }) {
   const initialState = { name: "", email: "", message: "" };
   const [formData, setformData] = useState(initialState);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handlePress = () => {
-    dispatch(contactUs(formData, navigation));    
+    dispatch(contactUs(formData, navigation));
   };
   return (
     <ScrollView>
@@ -56,43 +56,27 @@ export default function Contact({ navigation }) {
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Name</Text>
             <TextInput
-
-
-                                        style={styles.input}
-
-
-                                        textContentType="name"
-
-
-                                        onChangeText={(text) =>
+              style={styles.input}
+              textContentType="name"
+              onChangeText={(text) =>
                 setformData({
                   ...formData,
                   name: text,
                 })
               }
-            
-            
             />
           </View>
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Email</Text>
             <TextInput
-             
-             
               style={styles.input}
-             
-             
               textContentType="emailAddress"
-             
-             
               onChangeText={(text) =>
                 setformData({
                   ...formData,
                   email: text,
                 })
               }
-           
-           
             />
           </View>
           <View style={{ ...styles.inputDiv }}>

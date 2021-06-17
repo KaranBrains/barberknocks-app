@@ -7,22 +7,38 @@ import {
   Text,
   Dimensions,
   TextInput,
-  TouchableOpacity,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import { Button, Card } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { allService } from "../redux/actions/service";
-import { globalStyles } from "../styles/global";
 
 let ScreenHeight = Dimensions.get("window").height - 40;
 export default function ServiceLocation({ navigation }) {
+  const initialState = { city: "torronto", service: "" };
+  const [formData, setformData] = useState(initialState);
+  const [serviceId, setServiceId] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(allService());
-  }, []);
+  }, [serviceId]);
+
   const handlePress = () => {
-    navigation.navigate("Forgot");
+    if (!formData.city || !formData.service) {
+      alert("You need to select both the entries");
+      return;
+    } else {
+      navigation.navigate("Slots", {
+        city: formData.city,
+        service: formData.service,
+      });
+    }
+    navigation.navigate("Slots", {});
+  };
+  const handlePressService = (id) => {
+    console.log("id");
+    //   setformData({...formData, service:})
   };
   const allServices = useSelector((state) => state.service?.AllData?.services);
   return (
@@ -34,16 +50,27 @@ export default function ServiceLocation({ navigation }) {
         <View style={{ ...styles.Logincard }}>
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Location</Text>
-            <TextInput style={styles.input} textContentType="name" />
+            <TextInput
+              style={styles.input}
+              textContentType="name"
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  city: text,
+                })
+              }
+            />
             <Text style={{ ...styles.inputHeading }}>Services</Text>
             <View style={styles.serviceCards}>
               {allServices?.map((service) => (
                 <Card containerStyle={styles.card}>
-                  <Image
-                    source={require("../assets/Barber.png")}
-                    style={styles.serviceImage}
-                  />
-                  <Text style={styles.heading}>{service.name}</Text>
+                  <TouchableOpacity onPress={handlePressService(service._id)}>
+                    <Image
+                      source={require("../assets/Barber.png")}
+                      style={styles.serviceImage}
+                    />
+                    <Text style={styles.heading}>{service.name}</Text>
+                  </TouchableOpacity>
                 </Card>
               ))}
             </View>
@@ -52,6 +79,7 @@ export default function ServiceLocation({ navigation }) {
             title="Continue"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
+            onPress={handlePress}
           />
         </View>
       </ImageBackground>
