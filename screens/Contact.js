@@ -12,7 +12,7 @@ import { Button } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import { contactUs } from "../redux/actions/contact";
 
-let ScreenHeight = Dimensions.get("window").height - 70;
+let ScreenHeight = Dimensions.get("window").height;
 export default function Contact({ navigation }) {
   const initialState = { name: "", email: "", message: "" };
   const [formData, setformData] = useState(initialState);

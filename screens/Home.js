@@ -73,7 +73,7 @@ function Home({ navigation }) {
         </View>
       </ImageBackground>
       <Feature />
-      <Service />
+      <Service navigation={navigation} />
       <Stylist />
       <Carousel
         data={video}
@@ -84,7 +84,7 @@ function Home({ navigation }) {
         layout={"default"}
       />
       <Faq />
-      <Footer navigation={navigation}  />      
+      <Footer navigation={navigation} />
     </ScrollView>
   );
 }
