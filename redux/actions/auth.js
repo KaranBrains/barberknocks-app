@@ -40,26 +40,21 @@ const _retrieveData = async (key) => {
 };
 
 // SIGNIN
-export const signIn = (formData, router) => async (dispatch) => {
+export const signIn = (formData) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
-    console.log(jwt(data.token));
+    console.log((jwt(data.token)));
     dispatch({ type: SIGN_IN, data });
     const role = jwt(data.token).role;
-    if (role === 'admin') {
-      window.location.href="/admin/users";
-      return;
-    }
-    window.location.href="/";
     alert(`You are logged in as ${role}`)
   } catch (e) {
-    alert(e?.response?.data?.msg)
+    console.log(e?.response?.data)
   }
 };
 
 
 // SIGNUP
-export const signUp = (formData, router) => async (dispatch) => {
+export const signUp = (formData) => async (dispatch) => {
   try {
     try {
       await api.getPhoneOtp(formData.phone);
@@ -72,7 +67,6 @@ export const signUp = (formData, router) => async (dispatch) => {
     alert("You are signed up")
     await api.getEmailOtp(formData.email);
     _storeData("isEmailVerified", "false");
-    router.push("/auth/email");
   } catch (e) {
     console.log(e.response);
     alert(e?.response?.data?.msg)
@@ -80,7 +74,7 @@ export const signUp = (formData, router) => async (dispatch) => {
 };
 
 //Add Address
-export const addAddress = (formData, id, router) => async (dispatch) => {
+export const addAddress = (formData, id) => async (dispatch) => {
   try {
     const user = JSON.parse(_retrieveData("userProfile"))
     ? JSON.parse(_retrieveData("userProfile"))
@@ -88,11 +82,6 @@ export const addAddress = (formData, id, router) => async (dispatch) => {
     const { data } = await api.addAddress(formData,user.email);
     dispatch({ type: ADD_ADDRESS, data });
     alert("Address Added Successfully")
-    if (id=="address") {
-      router.push("/");
-    } else {
-      router.push("/confirm-address/"+id);
-    }
   } catch (e) {
     console.log(e.response);
     alert(e?.response?.data?.msg)
@@ -114,7 +103,7 @@ export const emailOtp = () => async (dispatch) => {
   }
 };
 
-export const verifyEmailOtp = (otp, router) => async (dispatch) => {
+export const verifyEmailOtp = (otp,) => async (dispatch) => {
   try {
     const formData = JSON.parse(_retrieveData("userProfile"))
       ? JSON.parse(_retrieveData("userProfile"))
@@ -124,7 +113,6 @@ export const verifyEmailOtp = (otp, router) => async (dispatch) => {
     alert( "Email is Verified")
     _storeData("isEmailVerified", "true");
     _storeData("isNumberVerified", "false");
-    router.push("/auth/phone");
     await api.getPhoneOtp(formData.phone);
   } catch (e) {
     console.log(e.response);
@@ -132,7 +120,7 @@ export const verifyEmailOtp = (otp, router) => async (dispatch) => {
   }
 };
 
-export const changePassword = (password, router) => async (dispatch) => {
+export const changePassword = (password) => async (dispatch) => {
   try {
     const formData = JSON.parse(_retrieveData("userProfile"));
     const token = _retrieveData("token");    
@@ -144,7 +132,6 @@ export const changePassword = (password, router) => async (dispatch) => {
     const { data } = await api.changePassword(body);
     dispatch({ type: CHANGE_PASSWORD, data });
     alert("Password changed")
-    router.push("/auth/login");
   } catch (e) {
     alert(e?.response?.data?.msg)
   }
@@ -164,7 +151,7 @@ export const phoneOtp = () => async (dispatch) => {
   }
 };
 
-export const verifyPhoneOtp = (otp, router) => async (dispatch) => {
+export const verifyPhoneOtp = (otp) => async (dispatch) => {
   try {
     const formData = JSON.parse(_retrieveData("userProfile"))
       ? JSON.parse(_retrieveData("userProfile"))
@@ -177,7 +164,6 @@ export const verifyPhoneOtp = (otp, router) => async (dispatch) => {
     dispatch({ type: VERIFY_PHONE, data });
     alert("Phone Number is Verified")
     _storeData("isNumberVerified", "true");
-    router.push("/auth/login");
   } catch (e) {
     alert(e?.response?.data?.msg)
   }
@@ -198,13 +184,12 @@ export const getUserByEmail = () => async (dispatch) => {
 };
 
 
-export const forgotEmailOtp = (formData, router) => async (dispatch) => {
+export const forgotEmailOtp = (formData) => async (dispatch) => {
   try {
     const { data } = await api.getEmailOtp(formData.email);
     _storeData("email", formData.email);
     alert( "Code is send to your email successfully")
     dispatch({ type: EMAIL_OTP, data });
-    router.push("/auth/forgot/otp");
   } catch (e) {
     alert(e?.response?.data?.msg)
   }
@@ -222,14 +207,13 @@ export const getLoggedInUser= () => async (dispatch) => {
   }
 };
 
-export const verifyForgotEmailOtp = (otp, router) => async (dispatch) => {
+export const verifyForgotEmailOtp = (otp) => async (dispatch) => {
   try {
     const formData = _retrieveData("email");
     console.log(formData);
     const { data } = await api.verifyForgotEmailOtp(otp, formData);    
     dispatch({ type: VERIFY_FORGOT, data });    
     alert("OTP Verified")
-    router.push("/auth/forgot/password");
   } catch (e) {
     alert(e?.response?.data?.msg)
   }

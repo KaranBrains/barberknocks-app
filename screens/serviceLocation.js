@@ -7,7 +7,6 @@ import {
   Text,
   Dimensions,
   TextInput,
-  TouchableOpacity,
   Image,
 } from "react-native";
 import { Button, Card } from "react-native-elements";
@@ -21,9 +20,6 @@ export default function ServiceLocation({ navigation }) {
   useEffect(() => {
     dispatch(allService());
   }, []);
-  const handlePress = () => {
-    navigation.navigate("Forgot");
-  };
   const allServices = useSelector((state) => state.service?.AllData?.services);
   return (
     <ScrollView>
