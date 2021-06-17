@@ -11,6 +11,7 @@ export default function Service() {
     dispatch(allService());
   }, []);
   const allServices = useSelector((state) => state.service?.AllData?.services);
+  console.log(allServices)
   return (
     <View style={styles.services}>
       <Text style={globalStyles.mainHeading}>Popular Services</Text>

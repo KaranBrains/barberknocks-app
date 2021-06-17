@@ -87,7 +87,8 @@ export default function MyBookings({ navigation }) {
         borderStyle: "solid",
         width: "90%",
         marginBottom:15,
-        marginTop: 10
+        marginTop: 10,
+        borderRadius: 5
       },
       bookingsDetailsRow:{
         paddingLeft:15,
@@ -132,13 +133,15 @@ export default function MyBookings({ navigation }) {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        margin: 10
       },
       button:{
-        margin:10,
         backgroundColor: "#ffffff",
         borderColor: "#420a83",
-        borderWidth: 1
+        borderWidth: 1,
+        marginLeft: 10,
+        marginRight: 10
       },
       buttonText:{
         color: "#420a83"

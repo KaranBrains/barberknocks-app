@@ -10,6 +10,9 @@ import {
 import { Button, Card } from "react-native-elements";
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function MyAddress({ navigation }) {
+  const handlePress = () => {
+    navigation.navigate("AddAddress");
+  };
   return (
     <ScrollView>
       <View style={{ ...styles.header }}>
@@ -19,6 +22,7 @@ export default function MyAddress({ navigation }) {
             title="+"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
+            onPress={handlePress}
           />
         </View>
         <View style={{ ...styles.bookingsDetailsCard }}>

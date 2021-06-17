@@ -9,15 +9,29 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Card } from "react-native-elements";
+import { signIn } from "../redux/actions/auth";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function Login({ navigation }) {
+  const initialState = { email: "", password: "" };
+  const [formData, setformData] = useState(initialState);
+  const dispatch = useDispatch();
   const handlePress = () => {
     navigation.navigate("Forgot");
   };
+  const handlePressSignUp = () => {
+    navigation.navigate("Signup");
+  };
+  const handleSubmit = () => {
+    dispatch(signIn(formData));
+    setformData(initialState);
+  };
+
   return (
     <ScrollView>
+      {console.log(formData)}
       <ImageBackground
         source={require("../assets/bg_1.jpg")}
         style={{ ...styles.header }}
@@ -26,22 +40,42 @@ export default function Login({ navigation }) {
           <Text style={{ ...styles.titleText }}>Sign in to your account</Text>
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Email</Text>
-            <TextInput style={styles.input} textContentType="emailAddress" />
+            <TextInput
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  email: text,
+                })
+              }
+              style={styles.input}
+              textContentType="emailAddress"
+            />
             <View style={{ ...styles.passwordDiv }}>
               <Text style={{ ...styles.inputHeading }}>Password</Text>
               <TouchableOpacity onPress={handlePress}>
                 <Text style={{ ...styles.inputHeading }}>Forgot Password?</Text>
               </TouchableOpacity>
             </View>
-            <TextInput style={styles.input} textContentType="password" />
+            <TextInput
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  password: text,
+                })
+              }
+              secureTextEntry={true}
+              style={styles.input}
+              textContentType="password"
+            />
           </View>
           <Button
+            onPress={handleSubmit}
             title="Signin"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
           />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePressSignUp}>
           <Text style={styles.touchbutton}>Become a member ? Signup </Text>
         </TouchableOpacity>
       </ImageBackground>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -10,14 +10,27 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Button, Card } from "react-native-elements";
+import { useDispatch, useSelector } from "react-redux";
+import { addAddress } from "../redux/actions/auth";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function AddAddress({ navigation }) {
-  const handlePress = () => {
-    navigation.navigate("Forgot");
+  const initialState = {
+    city: "Torronto",
+    province: "",
+    street: "",
+    postalCode: "",
+  };
+  const [formData, setformData] = useState(initialState);
+  const dispatch = useDispatch();
+  const handleSubmit = () => {
+    dispatch(addAddress(formData));
   };
   return (
     <ScrollView>
+      {
+  console.log(formData)
+      }
       <ImageBackground
         source={require("../assets/bg_1.jpg")}
         style={{ ...styles.header }}
@@ -25,18 +38,54 @@ export default function AddAddress({ navigation }) {
         <View style={{ ...styles.Logincard }}>
           <Text style={{ ...styles.titleText }}>Add Pickup Address</Text>
           <View style={{ ...styles.inputDiv }}>
-          <Text style={{ ...styles.inputHeading }}>City</Text>
-            <TextInput style={styles.input}/>
-            <Text style={{ ...styles.inputCity}}>*Surrey, Richmond, Langley, Delta, White Rock, Coquitlam, New Westminster, Vancouver, Burnaby</Text>
+            <Text style={{ ...styles.inputHeading }}>City</Text>
+            <TextInput
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  city: text,
+                })
+              }
+              style={styles.input}
+            />
+            <Text style={{ ...styles.inputCity }}>
+              *Surrey, Richmond, Langley, Delta, White Rock, Coquitlam, New
+              Westminster, Vancouver, Burnaby
+            </Text>
             <Text style={{ ...styles.inputHeading }}>Province</Text>
-            <TextInput style={styles.input}/>
+            <TextInput
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  province: text,
+                })
+              }
+              style={styles.input}
+            />
             <Text style={{ ...styles.inputHeading }}>Street Address</Text>
-            <TextInput style={styles.input}/>
+            <TextInput
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  street: text,
+                })
+              }
+              style={styles.input}
+            />
             <Text style={{ ...styles.inputHeading }}>Postal Code</Text>
-            <TextInput style={styles.input}/>
+            <TextInput
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  postalCode: text,
+                })
+              }
+              style={styles.input}
+            />
           </View>
           <Button
             title="Add"
+            onPress={handleSubmit}
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
           />
@@ -83,7 +132,7 @@ const styles = StyleSheet.create({
     color: "#420a83",
     fontSize: 18,
     fontFamily: "font-demi",
-    paddingTop:15
+    paddingTop: 15,
   },
   input: {
     backgroundColor: "#f3effd",
@@ -98,10 +147,10 @@ const styles = StyleSheet.create({
     borderColor: "#ced4da",
     borderStyle: "solid",
   },
-  inputCity:{
+  inputCity: {
     color: "#212529",
     fontSize: 12,
-    fontFamily:"font-demi"
+    fontFamily: "font-demi",
   },
   inputDiv: {
     paddingTop: 20,
