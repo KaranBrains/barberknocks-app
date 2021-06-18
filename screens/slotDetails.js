@@ -7,37 +7,9 @@ export default function SlotDetails({ navigation }) {
   return (
     <ScrollView>
       <View style={{ ...styles.header }}>
-        <Text style={{ ...styles.titleText }}>My Bookings</Text>
-        <View style={{ ...styles.buttonsDiv }}>
-          <Button
-            title="All Bookings"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-          />
-          <Button
-            title="Completed"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-          />
-        </View>
-        <View style={{ ...styles.buttonsDiv }}>
-          <Button
-            title="Scheduled"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-          />
-          <Button
-            title="Cancelled"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-          />
-        </View>
         <View style={{ ...styles.bookingsDetailsCard }}>
           <View style={{ ...styles.bookingsDetailsRow }}>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>Barber</Text>
-          </View>
-          <View style={{ ...styles.bookingsDetailsRow }}>
-            <Text style={{ ...styles.bookingsDetailsQuestion }}>Stylist</Text>
+            <Text style={{ ...styles.bookingsDetailsAnswer }}>Date</Text>
             <Text
               style={{
                 ...styles.bookingsDetailsAnswer,
@@ -50,13 +22,36 @@ export default function SlotDetails({ navigation }) {
           </View>
           <View style={{ ...styles.bookingsDetailsRow }}>
             <Text style={{ ...styles.bookingsDetailsAnswer }}>
-              Karan Brains
+              Time
             </Text>
             <Text style={{ ...styles.bookingsDetailsAnswer }}>
               2021-06-17 14:00
             </Text>
           </View>
         </View>
+        <View style={{ ...styles.bookingsDetailsCard }}>
+          <View style={{ ...styles.bookingsDetailsRow }}>
+            <Text style={{ ...styles.bookingsDetailsAnswer }}>Stylist</Text>
+            <Text
+              style={{
+                ...styles.bookingsDetailsAnswer,
+                ...styles.statusButton,
+                ...styles.primary,
+              }}
+            >
+              Completed
+            </Text>
+          </View>
+          <View style={{ ...styles.bookingsDetailsRow }}>
+            <Text style={{ ...styles.bookingsDetailsAnswer }}>
+              Price
+            </Text>
+            <Text style={{ ...styles.bookingsDetailsAnswer }}>
+              2021-06-17 14:00
+            </Text>
+          </View>
+        </View>
+     
       </View>
     </ScrollView>
   );
@@ -74,6 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#ffffff",
+    paddingVertical: "45%"
   },
   titleText: {
     fontFamily: "font-bold",
