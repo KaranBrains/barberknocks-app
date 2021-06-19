@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./stackNavigator";
-import About from "./aboutStack"
-import Login from './authStack';
-import Signup from './signup'
+import About from "./aboutStack";
+import Login from "./authStack";
+import Signup from "./signup";
 import Contact from "./contactStack";
 import UserProfile from "./userProfile";
 import MyAddress from "./address";

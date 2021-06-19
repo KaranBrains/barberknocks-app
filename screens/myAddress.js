@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -8,8 +8,17 @@ import {
   TextInput,
 } from "react-native";
 import { Button, Card } from "react-native-elements";
+import { useIsFocused } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserByEmail } from "../redux/actions/auth";
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function MyAddress({ navigation }) {
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserByEmail());
+  }, [navigation, isFocused]);
+  let user = useSelector((state) => state.main?.authData?.user);
   const handlePress = () => {
     navigation.navigate("AddAddress");
   };
@@ -25,14 +34,36 @@ export default function MyAddress({ navigation }) {
             onPress={handlePress}
           />
         </View>
-        <View style={{ ...styles.bookingsDetailsCard }}>
-          <View style={{ ...styles.inputDiv }}>
-            <TextInput editable={false} style={styles.input} />
-            <TextInput editable={false} style={styles.input} />
-            <TextInput editable={false} style={styles.input} />
-            <TextInput editable={false} style={styles.input} />
-          </View>
-        </View>
+        {user ? (
+          user?.address.map((add) => (
+            <View style={{ ...styles.bookingsDetailsCard }}>
+              <View style={{ ...styles.inputDiv }}>
+                <TextInput
+                  value={add?.street}
+                  editable={false}
+                  style={styles.input}
+                />
+                <TextInput
+                  value={add?.city}
+                  editable={false}
+                  style={styles.input}
+                />
+                <TextInput
+                  value={add?.postalCode}
+                  editable={false}
+                  style={styles.input}
+                />
+                <TextInput
+                  value={add?.province}
+                  editable={false}
+                  style={styles.input}
+                />
+              </View>
+            </View>
+          ))
+        ) : (
+          <Text>No address</Text>
+        )}
       </View>
     </ScrollView>
   );
@@ -50,6 +81,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#ffffff",
+    paddingBottom: 20,
   },
   titleText: {
     fontFamily: "font-bold",
@@ -68,6 +100,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ced4da",
     borderStyle: "solid",
+    color: "black",
   },
   bookingsDetailsCard: {
     padding: 15,
