@@ -25,9 +25,7 @@ export default function Login({ navigation }) {
     navigation.navigate("Signup");
   };
   const handleSubmit = () => {
-    dispatch(signIn(formData)).then(()=>{
-      navigation.navigate("Home");
-    })
+    dispatch(signIn(formData, navigation));
     setformData(initialState);
   };
 

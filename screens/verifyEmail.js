@@ -16,16 +16,16 @@ export default function VerifyEmail({ navigation }) {
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(verifyEmailOtp(otp))
-    .then(() =>{
-      navigation.navigate("VerifyPhone");
-    })
+    if (otp) {
+      dispatch(verifyEmailOtp(otp.toString(), navigation));
+    }
   };
   const resendOtp = () => {
     dispatch(emailOtp());
   };
   return (
     <ScrollView>
+      {console.log(otp)}
       <View style={{ ...styles.header }}>
         <View style={{ ...styles.Signupcard }}>
           <View style={{ ...styles.stepDiv }}>
@@ -51,11 +51,7 @@ export default function VerifyEmail({ navigation }) {
           </Text>
           <View style={{ ...styles.inputDiv }}>
             <TextInput
-              onChangeText={(text) =>
-                setOtp({
-                  text,
-                })
-              }
+              onChangeText={(text) => setOtp(text)}
               style={styles.input}
               maxLength={6}
               keyboardType="numeric"

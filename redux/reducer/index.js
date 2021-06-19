@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 
 import service from "./service";
-import auth from "./auth";
+import main from "./auth";
+import bookings from "./bookings";
 
 export default combineReducers({
-   service,
-   auth
+  service,
+  main,
+  bookings,
 });

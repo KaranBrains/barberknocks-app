@@ -23,7 +23,7 @@ export default function Service() {
             />
             <Text style={globalStyles.heading}>{stylist.name}</Text>
           </Card>
-        ))}        
+        ))}
       </View>
     </View>
   );
@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
     width: "40%",
     alignSelf: "center",
   },
-  stylistCards:{
+  stylistCards: {
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

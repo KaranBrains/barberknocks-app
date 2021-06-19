@@ -37,6 +37,7 @@ export default function Signup({ navigation }) {
         // We have data!!
         console.log("Data saved");
         console.log(value);
+        return value;
       }
     } catch (error) {
       alert("Error retrieving data");
@@ -50,13 +51,9 @@ export default function Signup({ navigation }) {
   };
   const handleSubmit = () => {
     formData.phone = formData.dialcode + formData.phone;
-    dispatch(signUp(formData))
-      .then(() => {
-        setformData(initialState);
-      })
-      .then(() => {
-        navigation.navigate("VerifyEmail");
-      });
+    dispatch(signUp(formData, navigation)).then(() => {
+      setformData(initialState);
+    });
     _storeData("userProfile", JSON.stringify(formData));
   };
   return (
