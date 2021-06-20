@@ -20,6 +20,13 @@ export default function Slots({ navigation, route }) {
   const service = route?.params?.service;
   const city = route?.params?.city;
 
+  let allSlots = useSelector((state) =>
+    console.log(state.slot?.serviceSlot?.slots)
+  );
+  const allStylists = useSelector((state) => state.service?.AllData?.services);
+
+  console.log("------------------------------------------");
+  console.log("------------------------------------------");
   useEffect(() => {
     if (service && city) {
       dispatch(ServiceSlots(service, city));
@@ -28,20 +35,13 @@ export default function Slots({ navigation, route }) {
     if (allSlots) {
       let filterSlots = allSlots.filter((slot) => {
         if (new Date(slot.date).getDate() == new Date().getDate()) {
-          return slot;
+          console.log(slot);
         }
       });
       setDisplaySlots(filterSlots);
     }
   }, [service, city, isFocused]);
-
-  let allSlots = useSelector((state) => {
-    return state.slot?.serviceSlot?.slots;
-  });
-  const allStylists = useSelector((state) => state.service?.AllData?.services);
-
-  console.log("------------------------------------------");
-  console.log("------------------------------------------");
+  console.log("DISPLAY SLOTS");
   console.log(allSlots);
 
   const startDate = selectedDate ? selectedDate.toString() : "";
