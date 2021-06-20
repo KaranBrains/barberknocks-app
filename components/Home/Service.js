@@ -7,29 +7,36 @@ import { allService } from "../../redux/actions/service";
 
 export default function Service({ navigation }) {
   const dispatch = useDispatch();
-  const handlePress = () => {    
+  const handlePress = () => {
     navigation.navigate("serviceLocation");
-  };;
+  };
   useEffect(() => {
     dispatch(allService());
   }, []);
   const allServices = useSelector((state) => state.service?.AllData?.services);
-  console.log(allServices);
   return (
     <View style={styles.services}>
       <Text style={globalStyles.mainHeading}>Popular Services</Text>
       <View style={styles.serviceCards}>
-        {allServices?.map((service) => (
-          <Card containerStyle={styles.card}>
-            <TouchableOpacity onPress={handlePress}>
-              <Image
-                source={require("../../assets/Barber.png")}
-                style={styles.serviceImage}
-              />
-              <Text style={styles.heading}>{service.name}</Text>
-            </TouchableOpacity>
-          </Card>
-        ))}
+        {allServices?.map(
+          (service, index) =>
+            index < 5 && (
+              <Card containerStyle={styles.card}>
+                <TouchableOpacity onPress={handlePress}>
+                  <Image
+                    source={require("../../assets/Barber.png")}
+                    style={styles.serviceImage}
+                  />
+                  <Text style={styles.heading}>{service.name}</Text>
+                </TouchableOpacity>
+              </Card>
+            )
+        )}
+        <Card containerStyle={styles.card}>
+          <TouchableOpacity onPress={handlePress}>
+            <Text style={styles.heading}>More...</Text>
+          </TouchableOpacity>
+        </Card>
       </View>
     </View>
   );

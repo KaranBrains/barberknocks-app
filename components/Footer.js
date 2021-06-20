@@ -78,6 +78,7 @@ export default Footer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 30,
   },
   sectionHeader: {
     paddingTop: 20,
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 10,
     marginVertical: 20,
+    marginBottom: 30,
   },
   icon: {
     paddingRight: 15,

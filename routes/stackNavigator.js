@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Home";
 import Header from "../components/Header";
+import StackHeader from "../components/StackHeader";
 import ServiceLocation from "../screens/serviceLocation";
 import Slots from "../screens/Slots";
 import SlotDetails from "../screens/slotDetails";
@@ -28,7 +29,7 @@ function Navigator() {
         options={({ navigation }) => ({
           headerTitle: () => (
             <React.Fragment>
-              <Header navigation={navigation} title="Service Location" />
+              <StackHeader navigation={navigation} title="Service Location" />
             </React.Fragment>
           ),
         })}
@@ -39,7 +40,7 @@ function Navigator() {
         options={({ navigation }) => ({
           headerTitle: () => (
             <React.Fragment>
-              <Header navigation={navigation} title="Slots" />
+              <StackHeader navigation={navigation} title="Slots" />
             </React.Fragment>
           ),
         })}
@@ -50,7 +51,7 @@ function Navigator() {
         options={({ navigation }) => ({
           headerTitle: () => (
             <React.Fragment>
-              <Header navigation={navigation} title="Slot Details" />
+              <StackHeader navigation={navigation} title="Slot Details" />
             </React.Fragment>
           ),
         })}

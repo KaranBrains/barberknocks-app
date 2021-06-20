@@ -43,14 +43,12 @@ const _retrieveData = async (key) => {
 export const signIn = (formData, navigation) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);
-    console.log(jwt(data.token));
     dispatch({ type: SIGN_IN, data });
     await _storeData("token", data.token);
     const role = jwt(data.token).role;
     alert(`You are logged in as ${role}`);
     navigation.navigate("Home");
   } catch (e) {
-    console.log(e?.response?.data);
     alert(e?.response?.data?.msg);
   }
 };
@@ -69,10 +67,8 @@ export const signUp = (formData, navigation) => async (dispatch) => {
     alert("You are signed up");
     await api.getEmailOtp(formData.email);
     await _storeData("isEmailVerified", "false");
-    console.log(navigation);
     navigation.navigate("VerifyEmail");
   } catch (e) {
-    console.log(e.response);
     alert(e?.response?.data?.msg);
   }
 };
@@ -88,7 +84,6 @@ export const addAddress = (formData, navigation) => async (dispatch) => {
     alert("Address Added Successfully");
     navigation.navigate("MyAddress");
   } catch (e) {
-    console.log(e.response);
     alert(e?.response?.data?.msg);
   }
 };
@@ -112,8 +107,6 @@ export const verifyEmailOtp = (otp, navigation) => async (dispatch) => {
     const formData = (await _retrieveData("userProfile"))
       ? JSON.parse(await _retrieveData("userProfile"))
       : jwt(await _retrieveData("token"));
-    console.log("abc");
-    console.log(formData);
     const { data } = await api.verifyEmailOtp(otp, formData.email);
     dispatch({ type: VERIFY_EMAIL, data });
     alert("Email is Verified");
@@ -122,8 +115,6 @@ export const verifyEmailOtp = (otp, navigation) => async (dispatch) => {
     navigation.navigate("VerifyPhone");
     await api.getPhoneOtp(formData.phone);
   } catch (e) {
-    console.log("xyz");
-    console.log(e);
     alert(e?.response?.data?.msg);
   }
 };
@@ -184,7 +175,6 @@ export const getUserByEmail = () => async (dispatch) => {
       ? JSON.parse(await _retrieveData("userProfile"))
       : jwt(await _retrieveData("token"));
     const { data } = await api.getUserByEmail(formData.email);
-    console.log("xyz", data, formData.email);
     dispatch({ type: GET_USER_BY_EMAIL, data });
   } catch (e) {
     alert(e?.response?.data?.msg);
@@ -206,7 +196,6 @@ export const forgotEmailOtp = (formData) => async (dispatch) => {
 export const getLoggedInUser = () => async (dispatch) => {
   try {
     const formData = jwt(await _retrieveData("token"));
-    console.log(formData);
     const { data } = await api.getUserById(formData.id);
     dispatch({ type: GET_LOGGED_IN_USER, data });
   } catch (e) {
@@ -217,7 +206,6 @@ export const getLoggedInUser = () => async (dispatch) => {
 export const verifyForgotEmailOtp = (otp) => async (dispatch) => {
   try {
     const formData = await _retrieveData("email");
-    console.log(formData);
     const { data } = await api.verifyForgotEmailOtp(otp, formData);
     dispatch({ type: VERIFY_FORGOT, data });
     alert("OTP Verified");

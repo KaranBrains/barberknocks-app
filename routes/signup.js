@@ -1,7 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Signup from "../screens//Signup";
+import Signup from "../screens/Signup";
 import Header from "../components/Header";
+import StackHeader from "../components/StackHeader";
 import VerifyEmail from "../screens/verifyEmail";
 import VerifyPhone from "../screens/verifyPhone";
 
@@ -27,7 +28,7 @@ function Navigator() {
         options={({ navigation }) => ({
           headerTitle: () => (
             <React.Fragment>
-              <Header navigation={navigation} title="Verify Email Code" />
+              <StackHeader navigation={navigation} title="Verify Email Code" />
             </React.Fragment>
           ),
         })}
@@ -38,7 +39,7 @@ function Navigator() {
         options={({ navigation }) => ({
           headerTitle: () => (
             <React.Fragment>
-              <Header navigation={navigation} title="Verify Phone Code" />
+              <StackHeader navigation={navigation} title="Verify Phone Code" />
             </React.Fragment>
           ),
         })}

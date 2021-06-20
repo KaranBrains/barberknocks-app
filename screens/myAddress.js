@@ -7,7 +7,7 @@ import {
   Dimensions,
   TextInput,
 } from "react-native";
-import { Button, Card } from "react-native-elements";
+import { Button } from "react-native-elements";
 import { useIsFocused } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserByEmail } from "../redux/actions/auth";

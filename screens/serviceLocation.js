@@ -6,38 +6,37 @@ import {
   ScrollView,
   Text,
   Dimensions,
-  TextInput,
   Image,
   TouchableOpacity,
 } from "react-native";
-import { Button, Card } from "react-native-elements";
+import { Button } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { allService } from "../redux/actions/service";
+import SelectPicker from "react-native-form-select-picker";
 
 let ScreenHeight = Dimensions.get("window").height - 40;
 export default function ServiceLocation({ navigation }) {
-  const initialState = { city: "Torronto", service: "" };
+  const initialState = { service: "" };
   const [formData, setformData] = useState(initialState);
-  var [isPress, setIsPress] = React.useState(false);
+  const [selected, setSelected] = useState();
   const [serviceId, setServiceId] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(allService());
   }, [serviceId]);
-
+  const options = ["Torronto"];
   const handlePress = () => {
-    if (!formData.city || !formData.service) {
+    if (!selected || !formData.service) {
       alert("You need to select both the entries");
       return;
     } else {
       navigation.navigate("Slots", {
-        city: formData.city,
+        city: selected,
         service: formData.service,
       });
     }
   };
   const handlePressService = (id) => {
-    setIsPress(true);
     setformData({ ...formData, service: id });
   };
   const allServices = useSelector((state) => state.service?.AllData?.services);
@@ -50,26 +49,32 @@ export default function ServiceLocation({ navigation }) {
         <View style={{ ...styles.Logincard }}>
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Location</Text>
-            <TextInput
-              style={styles.input}
-              value={formData.city}
-              textContentType="name"
-              onChangeText={(text) =>
-                setformData({
-                  ...formData,
-                  city: text,
-                })
-              }
-            />
+            <SelectPicker
+              onValueChange={(value) => {
+                setSelected(value);
+              }}
+              selected={selected}
+              placeholder="Select Location"
+              placeholderStyle={{fontFamily:'font-demi', backgroundColor: '#EEE', padding: 10}}
+              style={styles.option}
+            >
+              {Object.values(options).map((val, index) => (
+                <SelectPicker.Item
+                  label={val}
+                  value={val}
+                  key={index}
+                />
+              ))}
+            </SelectPicker>
             <Text style={{ ...styles.inputHeading }}>Services</Text>
             <View style={styles.serviceCards}>
               {allServices?.map((service) => (
-                <Card containerStyle={{ ...styles.card }}>
+                <View style={ {...styles.card}}>
                   <TouchableOpacity
                     onPress={() => {
                       handlePressService(service._id);
                     }}
-                    style={isPress ? styles.border : ""}
+                    style={formData.service == service._id ? styles.border : ""}
                   >
                     <Image
                       source={require("../assets/Barber.png")}
@@ -77,7 +82,7 @@ export default function ServiceLocation({ navigation }) {
                     />
                     <Text style={styles.heading}>{service.name}</Text>
                   </TouchableOpacity>
-                </Card>
+                </View>
               ))}
             </View>
           </View>
@@ -103,6 +108,8 @@ const styles = StyleSheet.create({
     width: "40%",
     alignSelf: "center",
     borderRadius: 100,
+    padding: 5,
+    margin: 10
   },
   services: {
     backgroundColor: "#fff",
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontFamily: "font-demi",
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "center",
     color: "#333",
   },
@@ -189,9 +196,12 @@ const styles = StyleSheet.create({
     fontFamily: "font-demi",
   },
   border: {
-    borderWidth: 1,
-    borderColor: "#ced4da",
+    borderWidth: 1.5,
+    borderColor: "#730fe4",
     borderRadius: 50,
     padding: 5,
+  },
+  option: {
+    fontFamily: "font-demi",
   },
 });
