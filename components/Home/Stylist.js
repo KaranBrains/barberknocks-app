@@ -10,18 +10,19 @@ export default function Service() {
   useEffect(() => {
     dispatch(AllStylist());
   }, []);
-  const allStylists = useSelector((state) => state.service?.AllData?.services);
+  const allStylists = useSelector((state) => state.stylist?.AllData?.stylists);
   return (
     <View style={styles.stylists}>
       <Text style={globalStyles.mainHeading}>Expert Stylists</Text>
       <View style={styles.stylistCards}>
-        {allStylists?.map((stylist) => (
+        {allStylists?.map((stylist, index) => (
+          index < 3 &&
           <Card containerStyle={styles.stylistCard}>
             <Image
               source={require("../../assets/stylist.jpeg")}
               style={styles.stylistImage}
             />
-            <Text style={globalStyles.heading}>{stylist.name}</Text>
+            <Text style={styles.heading}>{stylist.fullName}</Text>
           </Card>
         ))}
       </View>
@@ -34,14 +35,14 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
   },
   stylistImage: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     alignSelf: "center",
     borderRadius: 400,
   },
   stylistCard: {
     borderRadius: 400,
-    width: "40%",
+    width: "26%",
     alignSelf: "center",
   },
   stylistCards: {
@@ -49,5 +50,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
+  },
+  heading: {
+    fontFamily: "font-demi",
+    fontSize: 16,
+    textAlign: "center",
+    color: "#333",
   },
 });

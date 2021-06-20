@@ -9,23 +9,18 @@ import { useIsFocused } from "@react-navigation/native";
 
 export default function Slots({ navigation, route }) {
   const dispatch = useDispatch();
-  const isFocused = useIsFocused();
-  const today = new Date();
-
-  const startDate = selectedDate ? selectedDate.toString() : "";
-  const service = route?.params?.service;
-  const city = route?.params?.city;
-
-  let allSlots = useSelector((state) => {
-    return state.slot?.serviceSlot?.slots;
-  });
   const [displaySlots, setDisplaySlots] = useState(allSlots);
   const [filteredSlots, setFilteredSlots] = useState(allSlots);
   const [displayStylists, setDisplayStylists] = useState();
+  const [selected, setselected] = useState("");
+  const [selectedSlot, setselectedSlot] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
 
+  const service = route?.query?.service;
+  const city = route?.query?.city;
+
   useEffect(() => {
-    dispatch(AllSlots());
+    dispatch(AllSlots);
     if ((service, city)) {
       dispatch(serviceSlots(service, city));
     }
@@ -38,16 +33,24 @@ export default function Slots({ navigation, route }) {
       });
       setDisplaySlots(filterSlots);
     }
-  }, [service, city, isFocused]);
+  }, [service, city]);
+
+  let allSlots = useSelector((state) => {
+    console.log(state);
+    return state.slot?.serviceSlot?.slots;
+  });
   const allStylists = useSelector((state) => state.service?.AllData?.services);
+
+  console.log("------------------------------------------");
   console.log(allSlots);
+
+  const startDate = selectedDate ? selectedDate.toString() : "";
+
   return (
     <View style={styles.container}>
       <CalendarPicker
         onDateChange={(date) => {
           setSelectedDate(date);
-          console.log("abc");
-          navigation.navigate("SlotDetails");
         }}
         selectedDayColor="#420a83"
         selectedDayTextColor="#FFFFFF"
@@ -55,8 +58,9 @@ export default function Slots({ navigation, route }) {
         initialDate={Date.now()}
       />
       <View>
-        <Text style={styles.text}>SELECTED DATE:{startDate}</Text>
+        <Text style={styles.text}>Selected Date:{startDate}</Text>
       </View>
+      <View>{/* {displaySlots.map(slot)} */}</View>
     </View>
   );
 }
@@ -65,10 +69,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
-    marginTop: 20,
     fontFamily: "font-medium",
   },
   text: {
-    fontFamily: "font-medium",
+    fontFamily: "font-demi",
+    fontSize: 18,
   },
 });

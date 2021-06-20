@@ -17,6 +17,11 @@ const dataArray = [
     content:
       "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue.  ",
   },
+  {
+    title: "Advanced Settings",
+    content:
+      "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue.  ",
+  },
 ];
 export default function Faq() {
   const handleHeader = (item, expanded) => {
@@ -27,7 +32,6 @@ export default function Faq() {
   const handleContent = (item, expanded) => {
     <View style={styles.content}>
       <Text>{item.content}</Text>
-      {console.log("abc")}
       {expanded ? (
         <Icon style={{ fontSize: 18 }} name="remove-circle" />
       ) : (
@@ -52,8 +56,8 @@ export default function Faq() {
           expandedIcon="remove"
           headerStyle={{ ...styles.header }}
           contentStyle={{ ...styles.content }}
-          //   renderHeader={handleHeader}
-          //   renderContent={handleContent}
+          // renderHeader={handleHeader}
+          // renderContent={handleContent}
         />
       </Content>
     </View>
@@ -63,10 +67,12 @@ export default function Faq() {
 const styles = StyleSheet.create({
   header: {
     fontFamily: "font-bold",
-    backgroundColor: "#b7daf8",
+    backgroundColor: "#EEEDED",
+    color: '#000'
   },
   content: {
     fontFamily: "font-medium",
-    backgroundColor: "#ddecf8",
+    backgroundColor: "#FEFEFE",
+    elevation: 3,
   },
 });

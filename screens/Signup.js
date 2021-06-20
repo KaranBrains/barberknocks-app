@@ -35,8 +35,6 @@ export default function Signup({ navigation }) {
       const value = await AsyncStorage.getItem(key);
       if (value !== null) {
         // We have data!!
-        console.log("Data saved");
-        console.log(value);
         return value;
       }
     } catch (error) {
@@ -58,79 +56,80 @@ export default function Signup({ navigation }) {
   };
   return (
     <ScrollView>
-      {console.log(formData)}
-      <ImageBackground
-        source={require("../assets/bg_1.jpg")}
-        style={{ ...styles.header }}
-      >
-        <View style={{ ...styles.Signupcard }}>
-          <Text style={{ ...styles.titleText }}>
-            Welcome to Barberknocks, Signup here...
-          </Text>
-          <View style={{ ...styles.inputDiv }}>
-            <Text style={{ ...styles.inputHeading }}>Full Name</Text>
-            <TextInput
-              onChangeText={(text) =>
-                setformData({
-                  ...formData,
-                  fullName: text,
-                })
-              }
-              style={styles.input}
-              textContentType="none"
-            />
-            <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
-              Email
-            </Text>
-            <TextInput
-              onChangeText={(text) =>
-                setformData({
-                  ...formData,
-                  email: text,
-                })
-              }
-              style={styles.input}
-              textContentType="emailAddress"
-            />
-            <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
-              Phone Number
-            </Text>
-            <TextInput
-              onChangeText={(text) =>
-                setformData({
-                  ...formData,
-                  phone: text,
-                })
-              }
-              style={styles.input}
-              textContentType="none"
-            />
-            <View style={{ ...styles.passwordDiv }}>
-              <Text style={{ ...styles.inputHeading }}>Password</Text>
+        {
+          <ImageBackground
+            source={require("../assets/bg_1.jpg")}
+            style={{ ...styles.header }}
+          >
+            <View style={{ ...styles.Signupcard }}>
+              <Text style={{ ...styles.titleText }}>
+                Welcome to Barberknocks, Signup here...
+              </Text>
+              <View style={{ ...styles.inputDiv }}>
+                <Text style={{ ...styles.inputHeading }}>Full Name</Text>
+                <TextInput
+                  onChangeText={(text) =>
+                    setformData({
+                      ...formData,
+                      fullName: text,
+                    })
+                  }
+                  style={styles.input}
+                  textContentType="none"
+                />
+                <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
+                  Email
+                </Text>
+                <TextInput
+                  onChangeText={(text) =>
+                    setformData({
+                      ...formData,
+                      email: text,
+                    })
+                  }
+                  style={styles.input}
+                  textContentType="emailAddress"
+                />
+                <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
+                  Phone Number
+                </Text>
+                <TextInput
+                  onChangeText={(text) =>
+                    setformData({
+                      ...formData,
+                      phone: text,
+                    })
+                  }
+                  style={styles.input}
+                  textContentType="none"
+                />
+                <View style={{ ...styles.passwordDiv }}>
+                  <Text style={{ ...styles.inputHeading }}>Password</Text>
+                </View>
+                <TextInput
+                  onChangeText={(text) =>
+                    setformData({
+                      ...formData,
+                      password: text,
+                    })
+                  }
+                  style={styles.input}
+                  textContentType="password"
+                  secureTextEntry={true}
+                />
+              </View>
+              <Button
+                onPress={handleSubmit}
+                title="Signup"
+                buttonStyle={styles.button}
+                titleStyle={styles.buttonText}
+              />
             </View>
-            <TextInput
-              onChangeText={(text) =>
-                setformData({
-                  ...formData,
-                  password: text,
-                })
-              }
-              style={styles.input}
-              textContentType="password"
-              secureTextEntry={true}
-            />
-          </View>
-          <Button
-            onPress={handleSubmit}
-            title="Signup"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-          />
-        </View>
-        <TouchableOpacity onPress={handlePressLogin}>
-          <Text style={styles.touchbutton}>Already a member ? Signin </Text>
-        </TouchableOpacity>
-      </ImageBackground>
+            <TouchableOpacity onPress={handlePressLogin}>
+              <Text style={styles.touchbutton}>Already a member ? Signin </Text>
+            </TouchableOpacity>
+          </ImageBackground>
+          }
     </ScrollView>
   );
 }

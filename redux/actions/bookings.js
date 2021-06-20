@@ -37,7 +37,6 @@ export const UserBookings = () => async (dispatch) => {
     const { data } = await api.myBookings(user.id);
     dispatch({ type: GET_MY_BOOKINGS, data });
   } catch (e) {
-    console.log(e);
     alert(e.response?.data.msg);
   }
 };
@@ -47,7 +46,6 @@ export const AllBookingsDetails = () => async (dispatch) => {
     const { data } = await api.allBookings();
     dispatch({ type: ALL_BOOKINGS, data });
   } catch (e) {
-    console.log(e.response);
     alert(e.response?.data.msg);
   }
 };
@@ -57,7 +55,6 @@ export const GetBookingById = (id) => async (dispatch) => {
     const { data } = await api.getBookingsById(id);
     dispatch({ type: GET_BOOKING_BY_ID, data });
   } catch (e) {
-    console.log(e.response);
     alert(e.response?.data.msg);
   }
 };

@@ -31,7 +31,6 @@ export default function Login({ navigation }) {
 
   return (
     <ScrollView>
-      {console.log(formData)}
       <ImageBackground
         source={require("../assets/bg_1.jpg")}
         style={{ ...styles.header }}

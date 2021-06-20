@@ -10,7 +10,6 @@ export const AllSlots = () => async (dispatch) => {
     const { data } = await api.allSlot();
     dispatch({ type: ADMIN_ALL_SLOT, data });
   } catch (e) {
-    console.log(e);
     alert(e.response?.data.msg);
   }
 };
@@ -20,7 +19,6 @@ export const serviceSlots = (service, city) => async (dispatch) => {
     const { data } = await api.serviceSlot(service, city);
     dispatch({ type: SERVICE_SLOT, data });
   } catch (e) {
-    console.log(e);
     alert(e.response?.data.msg);
   }
 };
@@ -30,7 +28,6 @@ export const GetSlotById = (id) => async (dispatch) => {
     const { data } = await api.getSlotById(id);
     dispatch({ type: GET_SLOT_BY_ID, data });
   } catch (e) {
-    console.log(e.response);
     alert(e.response?.data.msg);
   }
 };

@@ -25,7 +25,6 @@ export default function VerifyEmail({ navigation }) {
   };
   return (
     <ScrollView>
-      {console.log(otp)}
       <View style={{ ...styles.header }}>
         <View style={{ ...styles.Signupcard }}>
           <View style={{ ...styles.stepDiv }}>
