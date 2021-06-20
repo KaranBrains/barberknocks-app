@@ -4,6 +4,7 @@ import Home from "../screens/Home";
 import Header from "../components/Header";
 import ServiceLocation from "../screens/serviceLocation";
 import Slots from "../screens/Slots";
+import SlotDetails from "../screens/slotDetails";
 
 const Stack = createStackNavigator();
 
@@ -39,6 +40,17 @@ function Navigator() {
           headerTitle: () => (
             <React.Fragment>
               <Header navigation={navigation} title="Slots" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="SlotDetails"
+        component={SlotDetails}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <Header navigation={navigation} title="Slot Details" />
             </React.Fragment>
           ),
         })}
