@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 import { useDispatch, useSelector } from "react-redux";
-import { AllSlots, serviceSlots } from "../redux/actions/slot";
+import { AllSlots, ServiceSlots } from "../redux/actions/slot";
 import { AllStylist } from "../redux/actions/stylist";
 import { allSlot } from "../redux/api";
 import { useIsFocused } from "@react-navigation/native";
 
 export default function Slots({ navigation, route }) {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
   const [displaySlots, setDisplaySlots] = useState(allSlots);
   const [filteredSlots, setFilteredSlots] = useState(allSlots);
   const [displayStylists, setDisplayStylists] = useState();
@@ -16,13 +17,12 @@ export default function Slots({ navigation, route }) {
   const [selectedSlot, setselectedSlot] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
 
-  const service = route?.query?.service;
-  const city = route?.query?.city;
+  const service = route?.params?.service;
+  const city = route?.params?.city;
 
   useEffect(() => {
-    dispatch(AllSlots);
-    if ((service, city)) {
-      dispatch(serviceSlots(service, city));
+    if (service && city) {
+      dispatch(ServiceSlots(service, city));
     }
     dispatch(AllStylist());
     if (allSlots) {
@@ -33,14 +33,14 @@ export default function Slots({ navigation, route }) {
       });
       setDisplaySlots(filterSlots);
     }
-  }, [service, city]);
+  }, [service, city, isFocused]);
 
   let allSlots = useSelector((state) => {
-    console.log(state);
     return state.slot?.serviceSlot?.slots;
   });
   const allStylists = useSelector((state) => state.service?.AllData?.services);
 
+  console.log("------------------------------------------");
   console.log("------------------------------------------");
   console.log(allSlots);
 

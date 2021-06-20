@@ -14,9 +14,11 @@ export const AllSlots = () => async (dispatch) => {
   }
 };
 
-export const serviceSlots = (service, city) => async (dispatch) => {
+export const ServiceSlots = (service, city) => async (dispatch) => {
   try {
+    console.log("Hi");
     const { data } = await api.serviceSlot(service, city);
+    console.log(data);
     dispatch({ type: SERVICE_SLOT, data });
   } catch (e) {
     alert(e.response?.data.msg);
