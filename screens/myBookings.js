@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, ScrollView, Text, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { UserBookings } from "../redux/actions/bookings";
 import { Button, Card } from "react-native-elements";
@@ -84,6 +91,10 @@ export default function MyBookings({ navigation }) {
     displayBooking = null;
   }
 
+  function redirect(id) {
+    navigation.navigate("BookingsDetails", { id: id });
+  }
+
   return (
     <ScrollView>
       <View style={{ ...styles.header }}>
@@ -135,7 +146,13 @@ export default function MyBookings({ navigation }) {
         {modifiedBookings && modifiedBookings.length > 0
           ? modifiedBookings.map((val) => {
               return (
-                <View style={{ ...styles.bookingsDetailsCard }}>
+                <TouchableOpacity
+                  key={val?._id}
+                  onPress={() => {
+                    redirect(val?._id);
+                  }}
+                  style={{ ...styles.bookingsDetailsCard }}
+                >
                   <View style={{ ...styles.bookingsDetailsRow }}>
                     <Text style={{ ...styles.bookingsDetailsAnswer }}>
                       {val.service}
@@ -187,7 +204,7 @@ export default function MyBookings({ navigation }) {
                       {val.date} {val.time}
                     </Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               );
             })
           : displayBooking &&
@@ -196,7 +213,13 @@ export default function MyBookings({ navigation }) {
             !activeClass.button3
           ? displayBooking.map((val) => {
               return (
-                <View style={{ ...styles.bookingsDetailsCard }}>
+                <TouchableOpacity
+                  key={val?._id}
+                  onPress={() => {
+                    redirect(val?._id);
+                  }}
+                  style={{ ...styles.bookingsDetailsCard }}
+                >
                   <View style={{ ...styles.bookingsDetailsRow }}>
                     <Text style={{ ...styles.bookingsDetailsAnswer }}>
                       {val.service}
@@ -248,7 +271,7 @@ export default function MyBookings({ navigation }) {
                       {val.date} {val.time}
                     </Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               );
             })
           : null}
@@ -333,15 +356,15 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    width: "65%",
     margin: 10,
   },
   button: {
     backgroundColor: "#ffffff",
     borderColor: "#420a83",
     borderWidth: 1,
-    marginLeft: 10,
-    marginRight: 10,
+    width: 120,
   },
   buttonText: {
     color: "#420a83",
@@ -353,7 +376,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#007bff",
     borderColor: "#420a83",
     borderWidth: 1,
-    marginLeft: 10,
-    marginRight: 10,
+    width: 120,
   },
 });
