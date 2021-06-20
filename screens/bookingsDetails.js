@@ -13,7 +13,6 @@ export default function BookingsDetails({ navigation, route }) {
     return state.bookings?.BookingByID?.booking;
   });
   let stylist = useSelector((state) => {
-    console.log(state);
     return state.stylist?.stylistById?.stylist;
   });
 
@@ -26,7 +25,6 @@ export default function BookingsDetails({ navigation, route }) {
       });
     }
   }, [navigation, isFocused]);
-  console.log(booking);
   return (
     <ScrollView>
       {booking && stylist ? (

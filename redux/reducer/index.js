@@ -6,7 +6,7 @@ import contact from "./contact";
 import slot from "./slot";
 import main from "./auth";
 import bookings from "./bookings";
-
+import stylist from "./stylist";
 
 export default combineReducers({
   service,
@@ -15,4 +15,5 @@ export default combineReducers({
   slot,
   main,
   bookings,
+  stylist,
 });

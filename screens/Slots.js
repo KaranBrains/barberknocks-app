@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AllSlots, serviceSlots } from "../redux/actions/slot";
 import { AllStylist } from "../redux/actions/stylist";
 import { allSlot } from "../redux/api";
+import { useIsFocused } from "@react-navigation/native";
 
 export default function Slots({ navigation, route }) {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
   const today = new Date();
 
   const startDate = selectedDate ? selectedDate.toString() : "";
@@ -15,7 +17,6 @@ export default function Slots({ navigation, route }) {
   const city = route?.params?.city;
 
   let allSlots = useSelector((state) => {
-    console.log(state);
     return state.slot?.serviceSlot?.slots;
   });
   const [displaySlots, setDisplaySlots] = useState(allSlots);
@@ -24,6 +25,7 @@ export default function Slots({ navigation, route }) {
   const [selectedDate, setSelectedDate] = useState("");
 
   useEffect(() => {
+    dispatch(AllSlots());
     if ((service, city)) {
       dispatch(serviceSlots(service, city));
     }
@@ -36,9 +38,9 @@ export default function Slots({ navigation, route }) {
       });
       setDisplaySlots(filterSlots);
     }
-  }, [service, city]);
+  }, [service, city, isFocused]);
   const allStylists = useSelector((state) => state.service?.AllData?.services);
-  console.log(allStylists);
+  console.log(allSlots);
   return (
     <View style={styles.container}>
       <CalendarPicker
@@ -58,7 +60,6 @@ export default function Slots({ navigation, route }) {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
