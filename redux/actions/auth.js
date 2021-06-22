@@ -14,6 +14,7 @@ import {
 } from "../constants";
 import jwt from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DevSettings } from "react-native";
 
 //Store Data
 
@@ -47,6 +48,7 @@ export const signIn = (formData, navigation) => async (dispatch) => {
     await _storeData("token", data.token);
     const role = jwt(data.token).role;
     alert(`You are logged in as ${role}`);
+    DevSettings.reload();
     navigation.navigate("Home");
   } catch (e) {
     alert(e?.response?.data?.msg);
