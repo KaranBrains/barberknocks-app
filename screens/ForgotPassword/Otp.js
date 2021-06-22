@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   StyleSheet,
   View,
@@ -7,20 +8,18 @@ import {
   Text,
   Dimensions,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
-import { forgotEmailOtp } from "../../redux/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { verifyForgotEmailOtp } from "../../redux/actions/auth";
 import { Button } from "react-native-elements";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function ForgotEmail({ navigation }) {
-  const initialState = { email: "" };
-  const [formData, setformData] = useState(initialState);
+export default function ForgotOtp({ navigation }) {
+  const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(forgotEmailOtp(formData, navigation)).then(() => {});
-    setformData(initialState);
+    if (otp) {
+      dispatch(verifyForgotEmailOtp(otp.toString(), navigation));
+    }
   };
   return (
     <ScrollView>
@@ -30,26 +29,21 @@ export default function ForgotEmail({ navigation }) {
       >
         <View style={{ ...styles.Logincard }}>
           <Text style={{ ...styles.titleText }}>
-            Enter the E-mail associated with your account
+            Please enter the verification code on your email
           </Text>
           <View style={{ ...styles.inputDiv }}>
-            <Text style={{ ...styles.inputHeading }}>Email</Text>
             <TextInput
-              onChangeText={(text) =>
-                setformData({
-                  ...formData,
-                  email: text,
-                })
-              }
+              onChangeText={(text) => setOtp(text)}
               style={styles.input}
-              textContentType="emailAddress"
+              maxLength={6}
+              keyboardType="numeric"
             />
           </View>
           <Button
-            title="Send OTP"
+            onPress={handleSubmit}
+            title="Continue"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
-            onPress={handleSubmit}
           />
         </View>
       </ImageBackground>
