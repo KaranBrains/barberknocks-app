@@ -7,46 +7,44 @@ import {
   Text,
   Dimensions,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
-import { forgotEmailOtp } from "../../redux/actions/auth";
+import { changePassword } from "../../redux/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-native-elements";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function ForgotEmail({ navigation }) {
-  const initialState = { email: "" };
+export default function ChangePassword({ navigation }) {
+  const initialState = { password: "" };
   const [formData, setformData] = useState(initialState);
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(forgotEmailOtp(formData, navigation)).then(() => {});
+    dispatch(changePassword(formData, navigation)).then(() => {});
     setformData(initialState);
   };
   return (
     <ScrollView>
+      {console.log(formData)}
       <ImageBackground
         source={require("../../assets/bg_1.jpg")}
         style={{ ...styles.header }}
       >
         <View style={{ ...styles.Logincard }}>
-          <Text style={{ ...styles.titleText }}>
-            Enter the E-mail associated with your account
-          </Text>
+          <Text style={{ ...styles.titleText }}>Enter the New Password</Text>
           <View style={{ ...styles.inputDiv }}>
-            <Text style={{ ...styles.inputHeading }}>Email</Text>
+            <Text style={{ ...styles.inputHeading }}>New Password</Text>
             <TextInput
               onChangeText={(text) =>
                 setformData({
                   ...formData,
-                  email: text,
+                  password: text.toString(),
                 })
               }
               style={styles.input}
-              textContentType="emailAddress"
+              secureTextEntry={true}
             />
           </View>
           <Button
-            title="Send OTP"
+            title="Submit"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
             onPress={handleSubmit}

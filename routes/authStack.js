@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import StackHeader from "../components/StackHeader";
 import ForgotEmail from "../screens/ForgotPassword/Email";
 import ForgotOtp from "../screens/ForgotPassword/Otp";
-
+import NewPassword from "../screens/ForgotPassword/newPassword";
 
 const Stack = createStackNavigator();
 
@@ -41,6 +41,17 @@ function Navigator() {
           headerTitle: () => (
             <React.Fragment>
               <StackHeader navigation={navigation} title="Verification Code" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="NewPassword"
+        component={NewPassword}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <StackHeader navigation={navigation} title="Change Password" />
             </React.Fragment>
           ),
         })}
