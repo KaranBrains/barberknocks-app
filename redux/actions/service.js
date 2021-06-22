@@ -6,7 +6,6 @@ export const allService = () => async (dispatch) => {
     const { data } = await api.allService();
     dispatch({ type: ADMIN_ALL_SERVICES, data });
   } catch (e) {
-    console.log(e.response);
-    alert("abc");
+    alert(e.response?.data);
   }
 };

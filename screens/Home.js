@@ -20,11 +20,13 @@ let ScreenHeight = Dimensions.get("window").height - 70;
 const renderItem = () => (
   <View>
     <Card containerStyle={{ width: "100%" }}>
+      <Text style={styles.heading}>What People say?</Text>
       <Text style={globalStyles.subParagraph}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
       </Text>
+      <Text style={styles.person}>John Doe, Student</Text>
     </Card>
   </View>
 );
@@ -45,7 +47,7 @@ const video = [
     title: "",
   },
 ];
-function Home({ navigation }) {  
+function Home({ navigation }) {
   const handleSubmit = () => {
     navigation.navigate("serviceLocation");
   };
@@ -64,12 +66,14 @@ function Home({ navigation }) {
             Book your mobile hair and beauty service from top-stylists around
             the city today -
           </Text>
-          <Button
-            title="Book Now"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={handleSubmit}
-          />
+          <View style={styles.maarginTop}>
+            <Button
+              title="Book Now"
+              buttonStyle={styles.button}
+              titleStyle={styles.buttonText}
+              onPress={handleSubmit}
+            />
+          </View>
         </View>
       </ImageBackground>
       <Feature />
@@ -117,16 +121,32 @@ const styles = StyleSheet.create({
   homeTitle: {
     lineHeight: 50,
   },
+  maarginTop: {
+    marginTop: 20,
+  },
   button: {
     fontFamily: "font-demi",
     backgroundColor: "#05214D",
-    marginTop: 20,
     paddingHorizontal: 30,
     borderRadius: 5,
   },
   buttonText: {
     fontFamily: "font-demi",
     fontSize: 18,
+  },
+  heading: {
+    fontFamily: "font-bold",
+    fontSize: 20,
+    color: "#17907c",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  person: {
+    fontFamily: "font-demi",
+    fontSize: 15,
+    color: "#17907c",
+    textAlign: "center",
+    marginVertical: 10,
   },
 });
 

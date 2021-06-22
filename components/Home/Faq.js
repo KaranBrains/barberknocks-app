@@ -17,23 +17,50 @@ const dataArray = [
     content:
       "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue.  ",
   },
+  {
+    title: "Advanced Settings",
+    content:
+      "Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros, vitae egestas augue. Duis vel est augue.  ",
+  },
 ];
 export default function Faq() {
   const handleHeader = (item, expanded) => {
-    <View>
-      <Text>{item.title}</Text>
-    </View>;
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          padding: 10,
+          justifyContent: "space-between",
+          alignItems: "center",
+          fontFamily: "font-bold",
+          backgroundColor: "#EEEDED",
+          color: "#000",
+        }}
+      >
+        <Text style={{ fontWeight: "600" }}> {item.title}</Text>
+        {expanded ? (
+          <Icon style={{ fontSize: 18 }} name="remove-circle" />
+        ) : (
+          <Icon style={{ fontSize: 18 }} name="add-circle" />
+        )}
+      </View>
+    );
   };
   const handleContent = (item, expanded) => {
-    <View style={styles.content}>
-      <Text>{item.content}</Text>
-      {console.log("abc")}
-      {expanded ? (
-        <Icon style={{ fontSize: 18 }} name="remove-circle" />
-      ) : (
-        <Icon style={{ fontSize: 18 }} name="add-circle" />
-      )}
-    </View>;
+    return (
+      <Text
+        style={{
+          fontFamily: "font-medium",
+          backgroundColor: "#FEFEFE",
+          elevation: 3,
+          padding: 10,
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
+      >
+        {item.content}
+      </Text>
+    );
   };
   return (
     <View
@@ -50,10 +77,8 @@ export default function Faq() {
           animation={true}
           expanded={[0]}
           expandedIcon="remove"
-          headerStyle={{ ...styles.header }}
-          contentStyle={{ ...styles.content }}
-          //   renderHeader={handleHeader}
-          //   renderContent={handleContent}
+          renderHeader={handleHeader}
+          renderContent={handleContent}
         />
       </Content>
     </View>
@@ -63,10 +88,12 @@ export default function Faq() {
 const styles = StyleSheet.create({
   header: {
     fontFamily: "font-bold",
-    backgroundColor: "#b7daf8",
+    backgroundColor: "#EEEDED",
+    color: "#000",
   },
   content: {
     fontFamily: "font-medium",
-    backgroundColor: "#ddecf8",
+    backgroundColor: "#FEFEFE",
+    elevation: 3,
   },
 });

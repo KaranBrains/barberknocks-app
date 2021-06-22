@@ -62,12 +62,14 @@ const Footer = ({ navigation }) => {
       >
         <Text style={styles.footerHead}>Get Started</Text>
         <Text style={styles.footertext}>Book your mobile hair and beauty</Text>
-        <Button
-          title="Book Now"
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonText}
-          onPress={handleSubmit}
-        />
+        <View style={styles.maarginTop}>
+          <Button
+            title="Book Now"
+            buttonStyle={styles.button}
+            titleStyle={styles.buttonText}
+            onPress={handleSubmit}
+          />
+        </View>
       </ImageBackground>
     </View>
   );
@@ -78,6 +80,7 @@ export default Footer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 30,
   },
   sectionHeader: {
     paddingTop: 20,
@@ -98,6 +101,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 10,
     marginVertical: 20,
+    marginBottom: 30,
   },
   icon: {
     paddingRight: 15,
@@ -121,10 +125,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
+  maarginTop: {
+    marginTop: 20,
+  },
   button: {
     fontFamily: "font-demi",
     backgroundColor: "#05214D",
-    marginTop: 20,
     paddingHorizontal: 30,
     borderRadius: 5,
   },

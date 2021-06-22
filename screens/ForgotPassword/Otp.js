@@ -26,7 +26,12 @@ export default function ForgotOtp({ navigation }) {
             Please enter the verification code on your email
           </Text>
           <View style={{ ...styles.inputDiv }}>
-            {/* <OTPTextInput ref={(e) => (otpInput = e)} /> */}
+            <TextInput
+              onChangeText={(text) => setOtp(text)}
+              style={styles.input}
+              maxLength={6}
+              keyboardType="numeric"
+            />
           </View>
           <Button
             title="Continue"

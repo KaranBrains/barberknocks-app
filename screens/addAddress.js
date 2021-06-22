@@ -24,13 +24,10 @@ export default function AddAddress({ navigation }) {
   const [formData, setformData] = useState(initialState);
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(addAddress(formData));
+    dispatch(addAddress(formData, navigation));
   };
   return (
     <ScrollView>
-      {
-  console.log(formData)
-      }
       <ImageBackground
         source={require("../assets/bg_1.jpg")}
         style={{ ...styles.header }}

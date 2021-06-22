@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -10,25 +10,44 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import { Button, Card } from "react-native-elements";
-import { globalStyles } from "../styles/global";
+import { useIsFocused } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserByEmail } from "../redux/actions/auth";
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function UserProfile({ navigation }) {
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserByEmail());
+  }, [navigation, isFocused]);
+  let user = useSelector((state) => state.main?.authData?.user);
   return (
     <ScrollView>
       <View style={{ ...styles.Signupcard }}>
         <Text style={{ ...styles.titleText }}>User Profile</Text>
         <View style={{ ...styles.inputDiv }}>
           <Text style={{ ...styles.inputHeading }}>Full Name</Text>
-          <TextInput editable={false} style={styles.input} textContentType="none" />
+          <TextInput
+            value={user?.fullName}
+            editable={false}
+            style={styles.input}
+          />
           <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
             Email
           </Text>
-          <TextInput editable={false} style={styles.input} textContentType="emailAddress" />
+          <TextInput
+            value={user?.email}
+            editable={false}
+            style={styles.input}
+          />
           <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
             Phone Number
           </Text>
-          <TextInput editable={false} style={styles.input} textContentType="none" />
+          <TextInput
+            value={user?.phone}
+            editable={false}
+            style={styles.input}
+          />
         </View>
       </View>
     </ScrollView>
@@ -60,6 +79,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#f3effd",
+    borderRadius: 5,
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
@@ -69,6 +89,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ced4da",
     borderStyle: "solid",
+    color: "black",
   },
   passwordDiv: {
     display: "flex",
