@@ -24,7 +24,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
-    "react-native-calendar-picker": "^7.1.2",
+    "react-native-calendar-strip": "^2.2.3",
     "react-native-elements": "^3.4.2",
     "react-native-form-select-picker": "^0.0.12",
     "react-native-gesture-handler": "~1.10.2",

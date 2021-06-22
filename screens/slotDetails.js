@@ -1,9 +1,25 @@
-import React, { useState } from "react";
-import { StyleSheet, View, ScrollView, Text, Dimensions } from "react-native";
+import React, {useState, useEffect} from "react";
 import { Button, Card } from "react-native-elements";
+import { useSelector } from "react-redux";
+import { StyleSheet, View, ScrollView, Text, Dimensions } from "react-native";
+
 let ScreenHeight = Dimensions.get("window").height - 70;
 
-export default function SlotDetails({ navigation }) {
+export default function SlotDetails({ navigation, route }) {
+  useEffect(() => {
+    allSlots.map((slot) => {
+      if((slot._id).toString() == slotId){
+        return setDisplaySlot(slot);
+      }
+    })
+  }, [])
+  const [displaySlot, setDisplaySlot] = useState()
+  const slotId = route?.params?.id;
+  console.log(slotId)
+  const allSlots = useSelector((state) => state.slot?.serviceSlot?.slots);
+  const handleSubmit = () => {
+
+  };
   return (
     <ScrollView>
       <View style={{ ...styles.header }}>
@@ -17,15 +33,13 @@ export default function SlotDetails({ navigation }) {
                 ...styles.primary,
               }}
             >
-              Completed
+              {displaySlot?.date}
             </Text>
           </View>
           <View style={{ ...styles.bookingsDetailsRow }}>
+            <Text style={{ ...styles.bookingsDetailsAnswer }}>Time</Text>
             <Text style={{ ...styles.bookingsDetailsAnswer }}>
-              Time
-            </Text>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>
-              2021-06-17 14:00
+            {displaySlot?.time}
             </Text>
           </View>
         </View>
@@ -39,19 +53,22 @@ export default function SlotDetails({ navigation }) {
                 ...styles.primary,
               }}
             >
-              Completed
+              {displaySlot?.stylistName}
             </Text>
           </View>
           <View style={{ ...styles.bookingsDetailsRow }}>
+            <Text style={{ ...styles.bookingsDetailsAnswer }}>Price</Text>
             <Text style={{ ...styles.bookingsDetailsAnswer }}>
-              Price
-            </Text>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>
-              2021-06-17 14:00
+              {displaySlot?.price}
             </Text>
           </View>
         </View>
-     
+        <Button
+            onPress={handleSubmit}
+            title="Continue"
+            buttonStyle={styles.button}
+            titleStyle={styles.buttonText}
+          />
       </View>
     </ScrollView>
   );
@@ -138,13 +155,14 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   button: {
-    backgroundColor: "#ffffff",
-    borderColor: "#420a83",
-    borderWidth: 1,
-    marginLeft: 10,
-    marginRight: 10,
+    backgroundColor: "#730fe4",
+    paddingHorizontal: 50,
+    textAlign: "center",
+    marginTop: 30,
+    borderRadius: 5
   },
   buttonText: {
-    color: "#420a83",
+    fontFamily: "font-demi",
+    fontSize: 16,
   },
 });

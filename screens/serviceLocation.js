@@ -24,7 +24,7 @@ export default function ServiceLocation({ navigation }) {
   useEffect(() => {
     dispatch(allService());
   }, [serviceId]);
-  const options = ["Torronto"];
+  const options = ["torronto"];
   const handlePress = () => {
     if (!selected || !formData.service) {
       alert("You need to select both the entries");
