@@ -8,11 +8,19 @@ import Signup from "./signup";
 import Contact from "./contactStack";
 import UserProfile from "./userProfile";
 import MyAddress from "./address";
+import BecomeStylist from "./becomeStylist";
 import MyBookings from "./myBookings";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
+  useEffect(() => {
+    AsyncStorage.getItem("token").then((res) => {
+      console.log(res);
+    });
+  });
+
   return (
     <NavigationContainer>
       <Drawer.Navigator>
@@ -24,6 +32,7 @@ function DrawerNavigator() {
         <Drawer.Screen name="UserProfile" component={UserProfile} />
         <Drawer.Screen name="MyAddress" component={MyAddress} />
         <Drawer.Screen name="MyBookings" component={MyBookings} />
+        <Drawer.Screen name="BecomeStylist" component={BecomeStylist} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

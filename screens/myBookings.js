@@ -17,9 +17,7 @@ let ScreenHeight = Dimensions.get("window").height - 70;
 export default function MyBookings({ navigation }) {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
-  let myBookings = useSelector(
-    (state) => state.bookings?.MyBookingData?.myBookings
-  );
+
   let displayBooking;
   const id = 1;
   const [modifiedBookings, setModifiedBookings] = useState({});
@@ -33,7 +31,9 @@ export default function MyBookings({ navigation }) {
   useEffect(() => {
     dispatch(UserBookings());
   }, [navigation, isFocused]);
-
+  let myBookings = useSelector(
+    (state) => state.bookings?.MyBookingData?.myBookings
+  );
   if (myBookings) {
     displayBooking = myBookings;
   }
@@ -91,8 +91,8 @@ export default function MyBookings({ navigation }) {
     displayBooking = null;
   }
 
-  function redirect(id) {
-    navigation.navigate("BookingsDetails", { id: id });
+  function redirect(id, stylistId) {
+    navigation.navigate("BookingsDetails", { id: id, stylistId: stylistId });
   }
 
   return (
@@ -100,48 +100,56 @@ export default function MyBookings({ navigation }) {
       <View style={{ ...styles.header }}>
         <Text style={{ ...styles.titleText }}>My Bookings</Text>
         <View style={{ ...styles.buttonsDiv }}>
-          <Button
-            onPress={MyAllBookings}
-            title="All Bookings"
-            buttonStyle={
-              !activeClass.button1 ? styles.button : styles.activeButton
-            }
-            titleStyle={
-              !activeClass.button1 ? styles.buttonText : styles.whiteText
-            }
-          />
-          <Button
-            onPress={filterByCompleted}
-            title="Completed"
-            buttonStyle={
-              !activeClass.button2 ? styles.button : styles.activeButton
-            }
-            titleStyle={
-              !activeClass.button2 ? styles.buttonText : styles.whiteText
-            }
-          />
+          <View style={styles.padding20}>
+            <Button
+              onPress={MyAllBookings}
+              title="All Bookings"
+              buttonStyle={
+                !activeClass.button1 ? styles.button : styles.activeButton
+              }
+              titleStyle={
+                !activeClass.button1 ? styles.buttonText : styles.whiteText
+              }
+            />
+          </View>
+          <View style={styles.padding20}>
+            <Button
+              onPress={filterByCompleted}
+              title="Completed"
+              buttonStyle={
+                !activeClass.button2 ? styles.button : styles.activeButton
+              }
+              titleStyle={
+                !activeClass.button2 ? styles.buttonText : styles.whiteText
+              }
+            />
+          </View>
         </View>
         <View style={{ ...styles.buttonsDiv }}>
-          <Button
-            onPress={filterBySchedule}
-            title="Scheduled"
-            buttonStyle={
-              !activeClass.button3 ? styles.button : styles.activeButton
-            }
-            titleStyle={
-              !activeClass.button3 ? styles.buttonText : styles.whiteText
-            }
-          />
-          <Button
-            onPress={filterByCancelled}
-            title="Cancelled"
-            buttonStyle={
-              !activeClass.button4 ? styles.button : styles.activeButton
-            }
-            titleStyle={
-              !activeClass.button4 ? styles.buttonText : styles.whiteText
-            }
-          />
+          <View style={styles.padding20}>
+            <Button
+              onPress={filterBySchedule}
+              title="Scheduled"
+              buttonStyle={
+                !activeClass.button3 ? styles.button : styles.activeButton
+              }
+              titleStyle={
+                !activeClass.button3 ? styles.buttonText : styles.whiteText
+              }
+            />
+          </View>
+          <View style={styles.padding20}>
+            <Button
+              onPress={filterByCancelled}
+              title="Cancelled"
+              buttonStyle={
+                !activeClass.button4 ? styles.button : styles.activeButton
+              }
+              titleStyle={
+                !activeClass.button4 ? styles.buttonText : styles.whiteText
+              }
+            />
+          </View>
         </View>
         {modifiedBookings && modifiedBookings.length > 0
           ? modifiedBookings.map((val) => {
@@ -149,13 +157,13 @@ export default function MyBookings({ navigation }) {
                 <TouchableOpacity
                   key={val?._id}
                   onPress={() => {
-                    redirect(val?._id);
+                    redirect(val?._id, val?.stylist);
                   }}
                   style={{ ...styles.bookingsDetailsCard }}
                 >
                   <View style={{ ...styles.bookingsDetailsRow }}>
                     <Text style={{ ...styles.bookingsDetailsAnswer }}>
-                      {val.service}
+                      {val?.service}
                     </Text>
                   </View>
                   <View style={{ ...styles.bookingsDetailsRow }}>
@@ -216,13 +224,13 @@ export default function MyBookings({ navigation }) {
                 <TouchableOpacity
                   key={val?._id}
                   onPress={() => {
-                    redirect(val?._id);
+                    redirect(val?._id, val?.stylist);
                   }}
                   style={{ ...styles.bookingsDetailsCard }}
                 >
                   <View style={{ ...styles.bookingsDetailsRow }}>
                     <Text style={{ ...styles.bookingsDetailsAnswer }}>
-                      {val.service}
+                      {val?.service}
                     </Text>
                   </View>
                   <View style={{ ...styles.bookingsDetailsRow }}>
@@ -301,6 +309,10 @@ const styles = StyleSheet.create({
     padding: 30,
     paddingBottom: 10,
   },
+  padding20: {
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
   bookingsDetailsCard: {
     paddingTop: 15,
     paddingBottom: 15,
@@ -356,8 +368,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    width: "65%",
+    justifyContent: "center",
     margin: 10,
   },
   button: {
@@ -373,7 +384,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
   },
   activeButton: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#6495ed",
     borderColor: "#420a83",
     borderWidth: 1,
     width: 120,

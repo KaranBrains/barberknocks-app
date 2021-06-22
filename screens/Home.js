@@ -66,12 +66,14 @@ function Home({ navigation }) {
             Book your mobile hair and beauty service from top-stylists around
             the city today -
           </Text>
-          <Button
-            title="Book Now"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={handleSubmit}
-          />
+          <View style={styles.maarginTop}>
+            <Button
+              title="Book Now"
+              buttonStyle={styles.button}
+              titleStyle={styles.buttonText}
+              onPress={handleSubmit}
+            />
+          </View>
         </View>
       </ImageBackground>
       <Feature />
@@ -119,10 +121,12 @@ const styles = StyleSheet.create({
   homeTitle: {
     lineHeight: 50,
   },
+  maarginTop: {
+    marginTop: 20,
+  },
   button: {
     fontFamily: "font-demi",
     backgroundColor: "#05214D",
-    marginTop: 20,
     paddingHorizontal: 30,
     borderRadius: 5,
   },

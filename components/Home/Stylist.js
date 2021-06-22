@@ -15,16 +15,18 @@ export default function Service() {
     <View style={styles.stylists}>
       <Text style={globalStyles.mainHeading}>Expert Stylists</Text>
       <View style={styles.stylistCards}>
-        {allStylists?.map((stylist, index) => (
-          index < 3 &&
-          <Card containerStyle={styles.stylistCard}>
-            <Image
-              source={require("../../assets/stylist.jpeg")}
-              style={styles.stylistImage}
-            />
-            <Text style={styles.heading}>{stylist.fullName}</Text>
-          </Card>
-        ))}
+        {allStylists?.map(
+          (stylist, index) =>
+            index < 3 && (
+              <Card containerStyle={styles.stylistCard}>
+                <Image
+                  source={require("../../assets/stylist.jpeg")}
+                  style={styles.stylistImage}
+                />
+                <Text style={styles.heading}>{stylist.fullName}</Text>
+              </Card>
+            )
+        )}
       </View>
     </View>
   );
