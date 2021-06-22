@@ -28,6 +28,7 @@ export default function AddAddress({ navigation }) {
   };
   return (
     <ScrollView>
+      {console.log(formData)}
       <ImageBackground
         source={require("../assets/bg_1.jpg")}
         style={{ ...styles.header }}
