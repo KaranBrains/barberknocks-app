@@ -6,6 +6,7 @@ import StackHeader from "../components/StackHeader";
 import ServiceLocation from "../screens/serviceLocation";
 import Slots from "../screens/Slots";
 import SlotDetails from "../screens/slotDetails";
+import SelectAddress from "../screens/selectAddress";
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,17 @@ function Navigator() {
           headerTitle: () => (
             <React.Fragment>
               <StackHeader navigation={navigation} title="Slot Details" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="SelectAddress"
+        component={SelectAddress}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <StackHeader navigation={navigation} title="Select Address" />
             </React.Fragment>
           ),
         })}

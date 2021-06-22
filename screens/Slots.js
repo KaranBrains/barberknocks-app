@@ -8,7 +8,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 export default function Slots({ navigation, route }) {
   const [displaySlots, setDisplaySlots] = useState([]);
-  const [displayStylists, setDisplayStylists] = useState([]);
+  const [displayStylists, setDisplayStylists] = useState(null);
   const dispatch = useDispatch();
 
   const service = route?.params?.service;
