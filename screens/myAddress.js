@@ -6,6 +6,7 @@ import {
   Text,
   Dimensions,
   TextInput,
+  ActivityIndicator,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { useIsFocused } from "@react-navigation/native";
@@ -62,7 +63,7 @@ export default function MyAddress({ navigation }) {
             </View>
           ))
         ) : (
-          <Text>No address</Text>
+          <ActivityIndicator size="large" color="#420a83" />
         )}
       </View>
     </ScrollView>

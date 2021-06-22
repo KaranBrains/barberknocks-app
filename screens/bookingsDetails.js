@@ -14,6 +14,7 @@ import {
   ScrollView,
   Text,
   Dimensions,
+  ActivityIndicator,
   TextInput,
 } from "react-native";
 let ScreenHeight = Dimensions.get("window").height - 70;
@@ -217,7 +218,7 @@ export default function BookingsDetails({ navigation, route }) {
           ) : null}
         </View>
       ) : (
-        <Text style={{ ...styles.header }}>Loading...</Text>
+        <ActivityIndicator size="large" color="#420a83" />
       )}
     </ScrollView>
   );

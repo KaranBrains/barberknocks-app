@@ -16,6 +16,7 @@ import SelectPicker from "react-native-form-select-picker";
 
 let ScreenHeight = Dimensions.get("window").height - 40;
 export default function ServiceLocation({ navigation }) {
+  let image = "https://www.pigameapp.com:8081/";
   const initialState = { service: "" };
   const [formData, setformData] = useState(initialState);
   const [selected, setSelected] = useState();
@@ -55,21 +56,21 @@ export default function ServiceLocation({ navigation }) {
               }}
               selected={selected}
               placeholder="Select Location"
-              placeholderStyle={{fontFamily:'font-demi', backgroundColor: '#EEE', padding: 10}}
+              placeholderStyle={{
+                fontFamily: "font-demi",
+                backgroundColor: "#EEE",
+                padding: 10,
+              }}
               style={styles.option}
             >
               {Object.values(options).map((val, index) => (
-                <SelectPicker.Item
-                  label={val}
-                  value={val}
-                  key={index}
-                />
+                <SelectPicker.Item label={val} value={val} key={index} />
               ))}
             </SelectPicker>
             <Text style={{ ...styles.inputHeading }}>Services</Text>
             <View style={styles.serviceCards}>
               {allServices?.map((service) => (
-                <View style={ {...styles.card}}>
+                <View style={{ ...styles.card }}>
                   <TouchableOpacity
                     onPress={() => {
                       handlePressService(service._id);
@@ -77,7 +78,7 @@ export default function ServiceLocation({ navigation }) {
                     style={formData.service == service._id ? styles.border : ""}
                   >
                     <Image
-                      source={require("../assets/Barber.png")}
+                      source={{ uri: image + service?.icon }}
                       style={styles.serviceImage}
                     />
                     <Text style={styles.heading}>{service.name}</Text>
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 100,
     padding: 5,
-    margin: 10
+    margin: 10,
   },
   services: {
     backgroundColor: "#fff",
