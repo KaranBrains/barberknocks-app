@@ -6,6 +6,9 @@ import StackHeader from "../components/StackHeader";
 import ServiceLocation from "../screens/serviceLocation";
 import Slots from "../screens/Slots";
 import SlotDetails from "../screens/slotDetails";
+import SelectAddress from "../screens/selectAddress";
+import AddAddress from "../screens/addAddress";
+import Payment from "../screens/Payment";
 
 const Stack = createStackNavigator();
 
@@ -52,6 +55,39 @@ function Navigator() {
           headerTitle: () => (
             <React.Fragment>
               <StackHeader navigation={navigation} title="Slot Details" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="SelectAddress"
+        component={SelectAddress}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <StackHeader navigation={navigation} title="Select Address" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="AddAddress"
+        component={AddAddress}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <StackHeader navigation={navigation} title="Add Address" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <StackHeader navigation={navigation} title="Payment" />
             </React.Fragment>
           ),
         })}

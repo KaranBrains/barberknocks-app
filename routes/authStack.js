@@ -6,6 +6,7 @@ import StackHeader from "../components/StackHeader";
 import ForgotEmail from "../screens/ForgotPassword/Email";
 import ForgotOtp from "../screens/ForgotPassword/Otp";
 
+
 const Stack = createStackNavigator();
 
 function Navigator() {

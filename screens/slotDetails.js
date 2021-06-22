@@ -15,10 +15,9 @@ export default function SlotDetails({ navigation, route }) {
   }, [])
   const [displaySlot, setDisplaySlot] = useState()
   const slotId = route?.params?.id;
-  console.log(slotId)
   const allSlots = useSelector((state) => state.slot?.serviceSlot?.slots);
   const handleSubmit = () => {
-
+    navigation.navigate("SelectAddress", { id: route?.params.id });
   };
   return (
     <ScrollView>
@@ -29,8 +28,6 @@ export default function SlotDetails({ navigation, route }) {
             <Text
               style={{
                 ...styles.bookingsDetailsAnswer,
-                ...styles.statusButton,
-                ...styles.primary,
               }}
             >
               {displaySlot?.date}
@@ -39,7 +36,7 @@ export default function SlotDetails({ navigation, route }) {
           <View style={{ ...styles.bookingsDetailsRow }}>
             <Text style={{ ...styles.bookingsDetailsAnswer }}>Time</Text>
             <Text style={{ ...styles.bookingsDetailsAnswer }}>
-            {displaySlot?.time}
+              {displaySlot?.time}
             </Text>
           </View>
         </View>
@@ -58,17 +55,17 @@ export default function SlotDetails({ navigation, route }) {
           </View>
           <View style={{ ...styles.bookingsDetailsRow }}>
             <Text style={{ ...styles.bookingsDetailsAnswer }}>Price</Text>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>
-              {displaySlot?.price}
+            <Text style={{ ...styles.bookingsDetailsAnswer, ...styles.green }}>
+              {displaySlot?.price} USD
             </Text>
           </View>
         </View>
         <Button
-            onPress={handleSubmit}
-            title="Continue"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-          />
+          onPress={handleSubmit}
+          title="Continue"
+          buttonStyle={styles.button}
+          titleStyle={styles.buttonText}
+        />
       </View>
     </ScrollView>
   );
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: "#ffffff",
-    paddingVertical: "45%"
+    paddingVertical: "45%",
   },
   titleText: {
     fontFamily: "font-bold",
@@ -139,13 +136,8 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     borderRadius: 3,
   },
-  primary: {
-    backgroundColor: "#007bff",
-    color: "#ffffff",
-    borderRadius: 3,
-  },
-  statusButton: {
-    padding: 5,
+  green:{
+    color: 'green'
   },
   buttonsDiv: {
     display: "flex",
@@ -156,10 +148,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#730fe4",
-    paddingHorizontal: 50,
+    paddingHorizontal: 20,
     textAlign: "center",
     marginTop: 30,
-    borderRadius: 5
+    borderRadius: 5,
   },
   buttonText: {
     fontFamily: "font-demi",
