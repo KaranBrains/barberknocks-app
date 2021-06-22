@@ -54,7 +54,7 @@ export default function Slots({ navigation, route }) {
     setDisplayStylists(slot);
   };
   const handleStylist = (id) => {
-    navigation.navigate("SlotDetails", { id });
+    navigation.navigate("SlotDetails", {  id  });
   };
   const weekDates = [];
   for (let i = 0; i < 14; i++) {
