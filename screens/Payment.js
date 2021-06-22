@@ -16,8 +16,11 @@ import {
 import { Button } from "react-native-elements";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function Payment({ navigation }) {
-  const handleSubmit = () => {};
+export default function Payment({ navigation, route }) {
+  const id = route?.params?.id;
+  const handleSubmit = () => {
+    navigation.navigate("BookingsDetails", { id });
+  };
   const radio_props = [
     { label: "Cash", value: 0 },
     { label: "Pay Online", value: 1 },
@@ -36,7 +39,6 @@ export default function Payment({ navigation }) {
               </Text>
               <RadioForm
                 radio_props={radio_props}
-                initial={0}
                 buttonInnerColor={"#730fe4"}
                 buttonSize={10}
                 buttonOuterSize={25}

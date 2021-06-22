@@ -21,9 +21,6 @@ const getFonts = () =>
 function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   if (fontsLoaded) {
-    console.log("--------------------------------");
-    console.log("--------------------------------");
-    console.log("Hello");
     return (
       <React.Fragment>
         <Provider store={store}>

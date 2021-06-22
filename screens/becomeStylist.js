@@ -55,12 +55,8 @@ export default function BecomeStylist({ navigation }) {
     });
 
   allServices = useSelector((state) => state.service?.AllData?.services);
-  console.log("---------------------------------");
-  console.log("---------------------------------");
-  console.log("---------------------------------");
   return (
     <ScrollView>
-      {/* {console.log(formData)} */}
       {
         <ImageBackground
           source={require("../assets/bg_1.jpg")}

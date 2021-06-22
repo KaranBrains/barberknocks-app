@@ -10,7 +10,6 @@ export const AllStylist = () => async (dispatch) => {
     const { data } = await api.allStylist();
     dispatch({ type: ADMIN_ALL_STYLISTS, data });
   } catch (e) {
-    console.log(e.response);
     alert(e.response?.data.msg);
   }
 };
@@ -19,7 +18,6 @@ export const GetStylistById = (id) => async (dispatch) => {
     const { data } = await api.getStylistById(id);
     dispatch({ type: ADMIN_GET_STYLIST_BY_ID, data });
   } catch (e) {
-    console.log(e.response);
     alert(e.response?.data.msg);
   }
 };
@@ -31,7 +29,6 @@ export const AddStylist = (formData, navigation) => async (dispatch) => {
     alert("Stylist Added");
     navigation.navigate("Home");
   } catch (e) {
-    console.log(e.response);
     alert(e.response?.data.msg);
   }
 };

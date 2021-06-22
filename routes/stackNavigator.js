@@ -9,6 +9,7 @@ import SlotDetails from "../screens/slotDetails";
 import SelectAddress from "../screens/selectAddress";
 import AddAddress from "../screens/addAddress";
 import Payment from "../screens/Payment";
+import BookingsDetails from "../screens/bookingsDetails";
 
 const Stack = createStackNavigator();
 
@@ -88,6 +89,17 @@ function Navigator() {
           headerTitle: () => (
             <React.Fragment>
               <StackHeader navigation={navigation} title="Payment" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="BookingsDetails"
+        component={BookingsDetails}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <StackHeader navigation={navigation} title="Bookings Details" />
             </React.Fragment>
           ),
         })}

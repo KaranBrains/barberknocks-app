@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -19,10 +19,11 @@ import { getUserByEmail } from "../redux/actions/auth";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function SelectAddress({ navigation, route }) {
+  const [address, setAddress] = useState([]);
+  const [val, setVal] = useState("");
   const dispatch = useDispatch();
   const handlePress = () => {
-    console.log(navigation.navigate);
-    navigation.navigate("AddAddress");
+    navigation.navigate("AddAddress", { id: val });
   };
   useEffect(() => {
     dispatch(getUserByEmail());
@@ -35,7 +36,18 @@ export default function SelectAddress({ navigation, route }) {
   const handleSubmit = () => {
     navigation.navigate("Payment", { id: route?.params.id });
   };
-  let user = useSelector((state) => console.log(state.main?.authData?.user));
+  let user = useSelector((state) => state.main?.authData?.user);
+  let a = [];
+  useEffect(() => {
+    user?.address?.map((add) => {
+      add &&
+        a.push({
+          label: `${add.street} ${add.city} ${add.postalCode} ${add.province}`,
+          value: `${add._id}`,
+        });
+    });
+    setAddress(a);
+  }, []);
   return (
     <View>
       <ScrollView>
@@ -49,18 +61,15 @@ export default function SelectAddress({ navigation, route }) {
                 Please select the pickup address
               </Text>
               <RadioForm
-                radio_props={user}
-                initial={0}
+                radio_props={address}
                 buttonInnerColor={"#730fe4"}
                 buttonSize={10}
-                buttonOuterSize={25}
+                buttonOuterSize={20}
                 onPress={(value) => {
-                  console.log(value);
+                  setVal(value);
                 }}
               />
-              {!user  &&
-                <Text style={styles.noSlots}>No address</Text>
-              }
+              {!user && <Text style={styles.noSlots}>No address</Text>}
               <Button
                 onPress={handleSubmit}
                 title="Continue"
