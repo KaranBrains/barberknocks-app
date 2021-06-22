@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -7,70 +7,71 @@ import {
   Text,
   Dimensions,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Card } from "react-native-elements";
-import { globalStyles } from "../styles/global";
+import { useIsFocused } from "@react-navigation/native";
+import { allService } from "../redux/actions/service";
+import { AddStylist } from "../redux/actions/stylist";
+import { Button } from "react-native-elements";
 import { signUp } from "../redux/actions/auth";
 import SelectPicker from "react-native-form-select-picker";
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function Signup({ navigation }) {
-  const options = ["+1", "+91", "+221"];
+export default function BecomeStylist({ navigation }) {
+  let allServices = null;
+  const isFocused = useIsFocused();
+  const [options, setOptions] = useState({});
+  const options2 = ["torronto"];
   const [selected, setSelected] = useState();
+  const [selected2, setSelected2] = useState();
   const initialState = {
     fullName: "",
-    email: "",
-    password: "",
+    img: "",
     phone: "",
-    dialcode: "",
+    email: "",
+    service: "",
+    city: "",
   };
-  const _storeData = async (key, value) => {
-    try {
-      await AsyncStorage.setItem(key, value);
-    } catch (error) {
-      alert("Error saving data");
-    }
-  };
-  const _retrieveData = async (key) => {
-    try {
-      const value = await AsyncStorage.getItem(key);
-      if (value !== null) {
-        // We have data!!
-        return value;
-      }
-    } catch (error) {
-      alert("Error retrieving data");
-    }
-  };
-  const [formData, setformData] = useState(initialState);
-  const dispatch = useDispatch();
-  const handlePressLogin = () => {
-    navigation.navigate("Login");
-    _retrieveData("userProfile");
-  };
-  const handleSubmit = () => {
-    formData.phone = formData.dialcode + formData.phone;
-    dispatch(signUp(formData, navigation)).then(() => {
-      setformData(initialState);
+  useEffect(() => {
+    dispatch(allService()).then(() => {
+      setOptions(allServices);
     });
-    _storeData("userProfile", JSON.stringify(formData));
+  }, [isFocused, navigation]);
+  const [formData, setformData] = useState(initialState);
+  const [fileOneValue, setFileOneValue] = useState("");
+  const [fileOne, setFileOne] = useState("");
+  const dispatch = useDispatch();
+  const handleSubmit = () => {
+    dispatch(AddStylist(formData, navigation));
+    setformData(initialState);
+    setFileOne("");
   };
+
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  allServices = useSelector((state) => state.service?.AllData?.services);
+  console.log("---------------------------------");
+  console.log("---------------------------------");
+  console.log("---------------------------------");
   return (
     <ScrollView>
+      {/* {console.log(formData)} */}
       {
         <ImageBackground
           source={require("../assets/bg_1.jpg")}
           style={{ ...styles.header }}
         >
           <View style={{ ...styles.Signupcard }}>
-            <Text style={{ ...styles.titleText }}>
-              Welcome to Barberknocks, Signup here...
-            </Text>
+            <Text style={{ ...styles.titleText }}>Become a Stylist..</Text>
             <View style={{ ...styles.inputDiv }}>
               <Text style={{ ...styles.inputHeading }}>Full Name</Text>
               <TextInput
+                placeholder="Full Name"
                 onChangeText={(text) =>
                   setformData({
                     ...formData,
@@ -81,9 +82,53 @@ export default function Signup({ navigation }) {
                 textContentType="none"
               />
               <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
+                Service
+              </Text>
+              <SelectPicker
+                onValueChange={(value) => {
+                  setformData({
+                    ...formData,
+                    service: value,
+                  });
+                }}
+                selected={selected}
+                placeholder="Select Service"
+                style={styles.option}
+              >
+                {Object.values(options).map((val, index) => (
+                  <SelectPicker.Item
+                    label={val?.name}
+                    value={val?._id}
+                    key={index * 100}
+                  />
+                ))}
+              </SelectPicker>
+              <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
+                City
+              </Text>
+              <SelectPicker
+                onValueChange={(value) => {
+                  setformData({
+                    ...formData,
+                    city: value,
+                  });
+                }}
+                selected={selected2}
+                placeholder="Select City"
+                style={styles.option}
+              >
+                {Object.values(options2).map((val, index) => (
+                  <SelectPicker.Item label={val} value={val} key={index} />
+                ))}
+              </SelectPicker>
+              <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
+                Image
+              </Text>
+              <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
                 Email
               </Text>
               <TextInput
+                placeholder="Email"
                 onChangeText={(text) =>
                   setformData({
                     ...formData,
@@ -96,62 +141,25 @@ export default function Signup({ navigation }) {
               <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
                 Phone Number
               </Text>
-              <View style={{ ...styles.numberDiv }}>
-                <SelectPicker
-                  onValueChange={(value) => {
-                    setformData({
-                      ...formData,
-                      dialcode: value,
-                    });
-                  }}
-                  selected={selected}
-                  placeholder="Select Dial Code"
-                  style={styles.option}
-                >
-                  {Object.values(options).map((val, index) => (
-                    <SelectPicker.Item
-                      label={val}
-                      value={val}
-                      key={index * 10}
-                    />
-                  ))}
-                </SelectPicker>
-                <TextInput
-                  onChangeText={(text) =>
-                    setformData({
-                      ...formData,
-                      phone: text,
-                    })
-                  }
-                  style={{ ...styles.input, ...styles.phoneNumberinput }}
-                  textContentType="none"
-                />
-              </View>
-              <View style={{ ...styles.passwordDiv }}>
-                <Text style={{ ...styles.inputHeading }}>Password</Text>
-              </View>
               <TextInput
+                placeholder="Mobile Number"
                 onChangeText={(text) =>
                   setformData({
                     ...formData,
-                    password: text,
+                    phone: text,
                   })
                 }
-                style={styles.input}
-                textContentType="password"
-                secureTextEntry={true}
+                style={{ ...styles.input, ...styles.phoneNumberinput }}
+                textContentType="none"
               />
             </View>
             <Button
               onPress={handleSubmit}
-              title="Signup"
+              title="Submit"
               buttonStyle={styles.button}
               titleStyle={styles.buttonText}
             />
           </View>
-          <TouchableOpacity onPress={handlePressLogin}>
-            <Text style={styles.touchbutton}>Already a member ? Signin </Text>
-          </TouchableOpacity>
         </ImageBackground>
       }
     </ScrollView>
@@ -181,7 +189,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontFamily: "font-bold",
-    fontSize: 40,
+    fontSize: 36,
     color: "#420a83",
     textAlign: "center",
   },
@@ -228,12 +236,12 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   paddingTop: {
-    paddingTop: 10,
+    paddingTop: 15,
   },
   option: {
     backgroundColor: "#f3effd",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 12,
+    paddingBottom: 15,
     paddingLeft: 20,
     paddingRight: 20,
     height: 50,
@@ -242,13 +250,10 @@ const styles = StyleSheet.create({
     borderColor: "#ced4da",
     borderStyle: "solid",
     borderRadius: 5,
-    width: "25%",
+    fontFamily: "font-demi",
   },
   numberDiv: {
     display: "flex",
     flexDirection: "row",
-  },
-  phoneNumberinput: {
-    width: "75%",
   },
 });

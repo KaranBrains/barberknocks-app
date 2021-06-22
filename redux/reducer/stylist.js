@@ -1,9 +1,17 @@
-import { ADMIN_ALL_STYLISTS } from "../constants/index";
+import {
+  ADMIN_ALL_STYLISTS,
+  ADMIN_GET_STYLIST_BY_ID,
+  ADMIN_STYLIST_ADD,
+} from "../constants/index";
 
 export default (state = { AllData: null, stylistById: null }, action) => {
   switch (action.type) {
     case ADMIN_ALL_STYLISTS:
       return { ...state, AllData: action?.data };
+    case ADMIN_GET_STYLIST_BY_ID:
+      return { ...state, stylistById: action?.data };
+    case ADMIN_STYLIST_ADD:
+      return { ...state };
     default:
       return state;
   }

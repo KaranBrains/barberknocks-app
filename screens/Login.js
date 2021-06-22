@@ -25,15 +25,12 @@ export default function Login({ navigation }) {
     navigation.navigate("Signup");
   };
   const handleSubmit = () => {
-    dispatch(signIn(formData)).then(()=>{
-      navigation.navigate("Home");
-    })
+    dispatch(signIn(formData, navigation));
     setformData(initialState);
   };
 
   return (
     <ScrollView>
-      {console.log(formData)}
       <ImageBackground
         source={require("../assets/bg_1.jpg")}
         style={{ ...styles.header }}
