@@ -6,7 +6,10 @@ import { StyleSheet, View } from "react-native";
 export default function Logout({ navigation }) {
   const logOut = () => {
     AsyncStorage.removeItem("token").then(() => {
-      alert("Logged out Successfully");
+      AsyncStorage.removeItem("userProfile").then(() => {
+        alert("Logged out Successfully");
+        navigation.navigate("Home");
+      });
     });
   };
   return (

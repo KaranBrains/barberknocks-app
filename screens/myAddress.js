@@ -37,7 +37,10 @@ export default function MyAddress({ navigation }) {
         </View>
         {user ? (
           user?.address.map((add) => (
-            <View style={{ ...styles.bookingsDetailsCard }}>
+            <View
+              key={add?.street + add?.city + add?.postalCode}
+              style={{ ...styles.bookingsDetailsCard }}
+            >
               <View style={{ ...styles.inputDiv }}>
                 <TextInput
                   value={add?.street}
