@@ -22,7 +22,7 @@ export default function Slots({ navigation, route }) {
 
   useEffect(() => {
     if (service && city) {
-      dispatch(ServiceSlots(service, city));
+      dispatch(ServiceSlots(service, city.toLowerCase()));
     }
     dispatch(AllStylist());
     if (allSlots) {
@@ -38,11 +38,8 @@ export default function Slots({ navigation, route }) {
   let allSlots = useSelector((state) => {
     return state.slot?.serviceSlot?.slots;
   });
-  const allStylists = useSelector((state) => state.service?.AllData?.services);
-
-  console.log("------------------------------------------");
-  console.log("------------------------------------------");
   console.log(allSlots);
+  const allStylists = useSelector((state) => state.service?.AllData?.services);
 
   const startDate = selectedDate ? selectedDate.toString() : "";
 

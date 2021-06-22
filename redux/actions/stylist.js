@@ -16,8 +16,6 @@ export const AllStylist = () => async (dispatch) => {
 export const GetStylistById = (id) => async (dispatch) => {
   try {
     const { data } = await api.getStylistById(id);
-    console.log("axy");
-    // console.log(data);
     dispatch({ type: ADMIN_GET_STYLIST_BY_ID, data });
   } catch (e) {
     console.log(e.response);

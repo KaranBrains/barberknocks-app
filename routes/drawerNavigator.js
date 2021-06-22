@@ -9,10 +9,17 @@ import Contact from "./contactStack";
 import UserProfile from "./userProfile";
 import MyAddress from "./address";
 import MyBookings from "./myBookings";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
+  useEffect(() => {
+    AsyncStorage.getItem("token").then((res) => {
+      console.log(res);
+    });
+  });
+
   return (
     <NavigationContainer>
       <Drawer.Navigator>

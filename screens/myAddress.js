@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ced4da",
     borderStyle: "solid",
+    borderRadius: 5,
     color: "black",
   },
   bookingsDetailsCard: {

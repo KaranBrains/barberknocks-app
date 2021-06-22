@@ -17,9 +17,7 @@ let ScreenHeight = Dimensions.get("window").height - 70;
 export default function MyBookings({ navigation }) {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
-  let myBookings = useSelector(
-    (state) => state.bookings?.MyBookingData?.myBookings
-  );
+
   let displayBooking;
   const id = 1;
   const [modifiedBookings, setModifiedBookings] = useState({});
@@ -33,7 +31,9 @@ export default function MyBookings({ navigation }) {
   useEffect(() => {
     dispatch(UserBookings());
   }, [navigation, isFocused]);
-
+  let myBookings = useSelector(
+    (state) => state.bookings?.MyBookingData?.myBookings
+  );
   if (myBookings) {
     displayBooking = myBookings;
   }
@@ -91,8 +91,8 @@ export default function MyBookings({ navigation }) {
     displayBooking = null;
   }
 
-  function redirect(id) {
-    navigation.navigate("BookingsDetails", { id: id });
+  function redirect(id, stylistId) {
+    navigation.navigate("BookingsDetails", { id: id, stylistId: stylistId });
   }
 
   return (
@@ -149,13 +149,13 @@ export default function MyBookings({ navigation }) {
                 <TouchableOpacity
                   key={val?._id}
                   onPress={() => {
-                    redirect(val?._id);
+                    redirect(val?._id, val?.stylist);
                   }}
                   style={{ ...styles.bookingsDetailsCard }}
                 >
                   <View style={{ ...styles.bookingsDetailsRow }}>
                     <Text style={{ ...styles.bookingsDetailsAnswer }}>
-                      {val.service}
+                      {val?.service}
                     </Text>
                   </View>
                   <View style={{ ...styles.bookingsDetailsRow }}>
@@ -216,13 +216,13 @@ export default function MyBookings({ navigation }) {
                 <TouchableOpacity
                   key={val?._id}
                   onPress={() => {
-                    redirect(val?._id);
+                    redirect(val?._id, val?.stylist);
                   }}
                   style={{ ...styles.bookingsDetailsCard }}
                 >
                   <View style={{ ...styles.bookingsDetailsRow }}>
                     <Text style={{ ...styles.bookingsDetailsAnswer }}>
-                      {val.service}
+                      {val?.service}
                     </Text>
                   </View>
                   <View style={{ ...styles.bookingsDetailsRow }}>
