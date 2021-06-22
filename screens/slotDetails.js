@@ -17,7 +17,7 @@ export default function SlotDetails({ navigation, route }) {
   const slotId = route?.params?.id;
   const allSlots = useSelector((state) => state.slot?.serviceSlot?.slots);
   const handleSubmit = () => {
-    navigation.navigate("SelectAddress")
+    navigation.navigate("SelectAddress", { id: route?.params.id });
   };
   return (
     <ScrollView>

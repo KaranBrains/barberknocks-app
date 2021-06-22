@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -14,28 +14,14 @@ import {
   Text,
 } from "react-native";
 import { Button } from "react-native-elements";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserByEmail } from "../redux/actions/auth";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function SelectAddress({ navigation, route }) {
-  const dispatch = useDispatch();
-  const handlePress = () => {
-    console.log(navigation.navigate);
-    navigation.navigate("AddAddress");
-  };
-  useEffect(() => {
-    dispatch(getUserByEmail());
-  }, [navigation]);
-
+export default function Payment({ navigation }) {
+  const handleSubmit = () => {};
   const radio_props = [
-    { label: "param1", value: 0 },
-    { label: "param2", value: 1 },
+    { label: "Cash", value: 0 },
+    { label: "Pay Online", value: 1 },
   ];
-  const handleSubmit = () => {
-    navigation.navigate("Payment", { id: route?.params.id });
-  };
-  let user = useSelector((state) => console.log(state.main?.authData?.user));
   return (
     <View>
       <ScrollView>
@@ -46,10 +32,10 @@ export default function SelectAddress({ navigation, route }) {
           >
             <View style={{ ...styles.Signupcard }}>
               <Text style={{ ...styles.titleText }}>
-                Please select the pickup address
+                Please select the mode of payment..
               </Text>
               <RadioForm
-                radio_props={user}
+                radio_props={radio_props}
                 initial={0}
                 buttonInnerColor={"#730fe4"}
                 buttonSize={10}
@@ -58,19 +44,13 @@ export default function SelectAddress({ navigation, route }) {
                   console.log(value);
                 }}
               />
-              {!user  &&
-                <Text style={styles.noSlots}>No address</Text>
-              }
               <Button
                 onPress={handleSubmit}
-                title="Continue"
+                title="Confirm"
                 buttonStyle={styles.button}
                 titleStyle={styles.buttonText}
               />
             </View>
-            <TouchableOpacity onPress={handlePress}>
-              <Text style={styles.touchbutton}>Not in the list ? Add New </Text>
-            </TouchableOpacity>
           </ImageBackground>
         }
       </ScrollView>
@@ -141,12 +121,5 @@ const styles = StyleSheet.create({
   },
   paddingTop: {
     paddingTop: 10,
-  },
-  noSlots: {
-    color: "#730fe4",
-    textAlign: "center",
-    fontSize: 20,
-    marginVertical: 30,
-    fontFamily: "font-bold",
   },
 });
