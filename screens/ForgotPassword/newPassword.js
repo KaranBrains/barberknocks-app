@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import {
   StyleSheet,
   View,
@@ -9,41 +8,46 @@ import {
   Dimensions,
   TextInput,
 } from "react-native";
-import { verifyForgotEmailOtp } from "../../redux/actions/auth";
+import { changePassword } from "../../redux/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-native-elements";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
-export default function ForgotOtp({ navigation }) {
-  const [otp, setOtp] = useState("");
+export default function ChangePassword({ navigation }) {
+  const initialState = { password: "" };
+  const [formData, setformData] = useState(initialState);
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    if (otp) {
-      dispatch(verifyForgotEmailOtp(otp.toString(), navigation));
-    }
+    dispatch(changePassword(formData, navigation)).then(() => {});
+    setformData(initialState);
   };
   return (
     <ScrollView>
+      {console.log(formData)}
       <ImageBackground
         source={require("../../assets/bg_1.jpg")}
         style={{ ...styles.header }}
       >
         <View style={{ ...styles.Logincard }}>
-          <Text style={{ ...styles.titleText }}>
-            Please enter the verification code on your email
-          </Text>
+          <Text style={{ ...styles.titleText }}>Enter the New Password</Text>
           <View style={{ ...styles.inputDiv }}>
+            <Text style={{ ...styles.inputHeading }}>New Password</Text>
             <TextInput
-              onChangeText={(text) => setOtp(text)}
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  password: text.toString(),
+                })
+              }
               style={styles.input}
-              maxLength={6}
-              keyboardType="numeric"
+              secureTextEntry={true}
             />
           </View>
           <Button
-            onPress={handleSubmit}
-            title="Continue"
+            title="Submit"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
+            onPress={handleSubmit}
           />
         </View>
       </ImageBackground>

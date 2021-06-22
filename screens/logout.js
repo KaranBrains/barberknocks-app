@@ -4,36 +4,14 @@ import { Button } from "react-native-elements";
 import { StyleSheet, View } from "react-native";
 
 export default function Logout({ navigation }) {
-  const logOut = () => {
+  useEffect(() => {
     AsyncStorage.removeItem("token").then(() => {
       AsyncStorage.removeItem("userProfile").then(() => {
         alert("Logged out Successfully");
         navigation.navigate("Home");
       });
     });
-  };
-  return (
-    <>
-      <View style={styles.logoutCard}>
-        <Button
-          onPress={logOut}
-          title="Logout"
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonText}
-        />
-      </View>
-    </>
-  );
+  }, []);
+
+  return <></>;
 }
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#730fe4",
-  },
-  buttonText: {
-    fontFamily: "font-demi",
-    fontSize: 16,
-  },
-  logoutCard: {
-    padding: 20,
-  },
-});

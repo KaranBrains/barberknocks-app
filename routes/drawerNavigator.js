@@ -8,9 +8,9 @@ import Signup from "./signup";
 import Contact from "./contactStack";
 import UserProfile from "./userProfile";
 import MyAddress from "./address";
-import BecomeStylist from "./becomeStylist";
+// import BecomeStylist from "./becomeStylist";
 import MyBookings from "./myBookings";
-import Logout from "./logout";
+import Logout from "../screens/logout";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
@@ -33,7 +33,7 @@ function DrawerNavigator() {
         <Drawer.Screen name="UserProfile" component={UserProfile} />
         <Drawer.Screen name="MyAddress" component={MyAddress} />
         <Drawer.Screen name="MyBookings" component={MyBookings} />
-        <Drawer.Screen name="BecomeStylist" component={BecomeStylist} />
+        {/* <Drawer.Screen name="BecomeStylist" component={BecomeStylist} /> */}
         <Drawer.Screen name="Logout" component={Logout} />
       </Drawer.Navigator>
     </NavigationContainer>

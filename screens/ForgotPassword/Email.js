@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -9,12 +9,18 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { forgotEmailOtp } from "../../redux/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-native-elements";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function ForgotEmail({ navigation }) {
-  const handlePress = () => {
-    navigation.navigate("ForgotOtp");
+  const initialState = { email: "" };
+  const [formData, setformData] = useState(initialState);
+  const dispatch = useDispatch();
+  const handleSubmit = () => {
+    dispatch(forgotEmailOtp(formData, navigation)).then(() => {});
+    setformData(initialState);
   };
   return (
     <ScrollView>
@@ -28,13 +34,22 @@ export default function ForgotEmail({ navigation }) {
           </Text>
           <View style={{ ...styles.inputDiv }}>
             <Text style={{ ...styles.inputHeading }}>Email</Text>
-            <TextInput style={styles.input} textContentType="emailAddress" />
+            <TextInput
+              onChangeText={(text) =>
+                setformData({
+                  ...formData,
+                  email: text,
+                })
+              }
+              style={styles.input}
+              textContentType="emailAddress"
+            />
           </View>
           <Button
             title="Send OTP"
             buttonStyle={styles.button}
             titleStyle={styles.buttonText}
-            onPress={handlePress}
+            onPress={handleSubmit}
           />
         </View>
       </ImageBackground>

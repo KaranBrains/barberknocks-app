@@ -119,19 +119,19 @@ export const verifyEmailOtp = (otp, navigation) => async (dispatch) => {
   }
 };
 
-export const changePassword = (password) => async (dispatch) => {
+export const changePassword = (formData, navigation) => async (dispatch) => {
   try {
-    const formData = JSON.parse(await _retrieveData("userProfile"));
-    const token = await _retrieveData("token");
+    const email = await _retrieveData("email");
     const body = {
-      email: formData.email,
-      token: token,
-      pass: password,
+      email: email,
+      pass: formData.password,
     };
     const { data } = await api.changePassword(body);
     dispatch({ type: CHANGE_PASSWORD, data });
     alert("Password changed");
+    navigation.navigate("Login");
   } catch (e) {
+    console.log(e?.response?.data);
     alert(e?.response?.data?.msg);
   }
 };
@@ -182,11 +182,13 @@ export const getUserByEmail = () => async (dispatch) => {
   }
 };
 
-export const forgotEmailOtp = (formData) => async (dispatch) => {
+export const forgotEmailOtp = (formData, navigation) => async (dispatch) => {
   try {
     const { data } = await api.getEmailOtp(formData.email);
     await _storeData("email", formData.email);
     alert("Code is send to your email successfully");
+    await _storeData("email", formData.email);
+    navigation.navigate("ForgotOtp");
     dispatch({ type: EMAIL_OTP, data });
   } catch (e) {
     alert(e?.response?.data?.msg);
@@ -204,12 +206,13 @@ export const getLoggedInUser = () => async (dispatch) => {
   }
 };
 
-export const verifyForgotEmailOtp = (otp) => async (dispatch) => {
+export const verifyForgotEmailOtp = (otp, navigation) => async (dispatch) => {
   try {
     const formData = await _retrieveData("email");
     const { data } = await api.verifyForgotEmailOtp(otp, formData);
     dispatch({ type: VERIFY_FORGOT, data });
     alert("OTP Verified");
+    navigation.navigate("NewPassword");
   } catch (e) {
     alert(e?.response?.data?.msg);
   }
