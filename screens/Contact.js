@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     width: "100%",
-    minHeight: ScreenHeight,
+    height: ScreenHeight,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",

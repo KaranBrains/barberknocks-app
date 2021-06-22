@@ -7,7 +7,6 @@ import { allService } from "../../redux/actions/service";
 
 export default function Service({ navigation }) {
   const dispatch = useDispatch();
-  let image = "https://www.pigameapp.com:8081/";
   const handlePress = () => {
     navigation.navigate("serviceLocation");
   };
@@ -25,7 +24,7 @@ export default function Service({ navigation }) {
               <Card containerStyle={styles.card}>
                 <TouchableOpacity onPress={handlePress}>
                   <Image
-                    source={{ uri: image + service?.icon }}
+                    source={require("../../assets/Barber.png")}
                     style={styles.serviceImage}
                   />
                   <Text style={styles.heading}>{service.name}</Text>

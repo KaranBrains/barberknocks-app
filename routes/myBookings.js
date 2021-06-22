@@ -2,7 +2,6 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import MyBookings from "../screens/myBookings";
 import Header from "../components/Header";
-import StackHeader from "../components/StackHeader";
 import BookingsDetails from "../screens/bookingsDetails";
 
 const Stack = createStackNavigator();
@@ -27,7 +26,7 @@ function Navigator() {
         options={({ navigation }) => ({
           headerTitle: () => (
             <React.Fragment>
-              <StackHeader navigation={navigation} title="Bookings Details" />
+              <Header navigation={navigation} title="Bookings Details" />
             </React.Fragment>
           ),
         })}

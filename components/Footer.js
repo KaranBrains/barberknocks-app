@@ -62,14 +62,12 @@ const Footer = ({ navigation }) => {
       >
         <Text style={styles.footerHead}>Get Started</Text>
         <Text style={styles.footertext}>Book your mobile hair and beauty</Text>
-        <View style={styles.maarginTop}>
-          <Button
-            title="Book Now"
-            buttonStyle={styles.button}
-            titleStyle={styles.buttonText}
-            onPress={handleSubmit}
-          />
-        </View>
+        <Button
+          title="Book Now"
+          buttonStyle={styles.button}
+          titleStyle={styles.buttonText}
+          onPress={handleSubmit}
+        />
       </ImageBackground>
     </View>
   );
@@ -125,12 +123,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
-  maarginTop: {
-    marginTop: 20,
-  },
   button: {
     fontFamily: "font-demi",
     backgroundColor: "#05214D",
+    marginTop: 20,
     paddingHorizontal: 30,
     borderRadius: 5,
   },

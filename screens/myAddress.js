@@ -6,7 +6,6 @@ import {
   Text,
   Dimensions,
   TextInput,
-  ActivityIndicator,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { useIsFocused } from "@react-navigation/native";
@@ -66,7 +65,7 @@ export default function MyAddress({ navigation }) {
             </View>
           ))
         ) : (
-          <ActivityIndicator size="large" color="#420a83" />
+          <Text>No address</Text>
         )}
       </View>
     </ScrollView>
@@ -104,7 +103,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ced4da",
     borderStyle: "solid",
-    borderRadius: 5,
     color: "black",
   },
   bookingsDetailsCard: {
