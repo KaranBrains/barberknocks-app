@@ -1,6 +1,7 @@
 import {
   ADMIN_ALL_STYLISTS,
   ADMIN_GET_STYLIST_BY_ID,
+  ADMIN_STYLIST_ADD,
 } from "../constants/index";
 
 export default (state = { AllData: null, stylistById: null }, action) => {
@@ -9,6 +10,8 @@ export default (state = { AllData: null, stylistById: null }, action) => {
       return { ...state, AllData: action?.data };
     case ADMIN_GET_STYLIST_BY_ID:
       return { ...state, stylistById: action?.data };
+    case ADMIN_STYLIST_ADD:
+      return { ...state };
     default:
       return state;
   }
