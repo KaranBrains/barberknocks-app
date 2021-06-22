@@ -14,17 +14,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Card } from "react-native-elements";
 import { globalStyles } from "../styles/global";
 import { signUp } from "../redux/actions/auth";
-import SelectPicker from "react-native-form-select-picker";
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function Signup({ navigation }) {
-  const options = ["+1", "+91", "+221"];
-  const [selected, setSelected] = useState();
   const initialState = {
     fullName: "",
     email: "",
     password: "",
     phone: "",
-    dialcode: "",
+    dialcode: "+91",
   };
   const _storeData = async (key, value) => {
     try {
@@ -59,63 +56,43 @@ export default function Signup({ navigation }) {
   };
   return (
     <ScrollView>
-      {
-        <ImageBackground
-          source={require("../assets/bg_1.jpg")}
-          style={{ ...styles.header }}
-        >
-          <View style={{ ...styles.Signupcard }}>
-            <Text style={{ ...styles.titleText }}>
-              Welcome to Barberknocks, Signup here...
-            </Text>
-            <View style={{ ...styles.inputDiv }}>
-              <Text style={{ ...styles.inputHeading }}>Full Name</Text>
-              <TextInput
-                onChangeText={(text) =>
-                  setformData({
-                    ...formData,
-                    fullName: text,
-                  })
-                }
-                style={styles.input}
-                textContentType="none"
-              />
-              <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
-                Email
+        {
+          <ImageBackground
+            source={require("../assets/bg_1.jpg")}
+            style={{ ...styles.header }}
+          >
+            <View style={{ ...styles.Signupcard }}>
+              <Text style={{ ...styles.titleText }}>
+                Welcome to Barberknocks, Signup here...
               </Text>
-              <TextInput
-                onChangeText={(text) =>
-                  setformData({
-                    ...formData,
-                    email: text,
-                  })
-                }
-                style={styles.input}
-                textContentType="emailAddress"
-              />
-              <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
-                Phone Number
-              </Text>
-              <View style={{ ...styles.numberDiv }}>
-                <SelectPicker
-                  onValueChange={(value) => {
+              <View style={{ ...styles.inputDiv }}>
+                <Text style={{ ...styles.inputHeading }}>Full Name</Text>
+                <TextInput
+                  onChangeText={(text) =>
                     setformData({
                       ...formData,
-                      dialcode: value,
-                    });
-                  }}
-                  selected={selected}
-                  placeholder="Select Dial Code"
-                  style={styles.option}
-                >
-                  {Object.values(options).map((val, index) => (
-                    <SelectPicker.Item
-                      label={val}
-                      value={val}
-                      key={index * 10}
-                    />
-                  ))}
-                </SelectPicker>
+                      fullName: text,
+                    })
+                  }
+                  style={styles.input}
+                  textContentType="none"
+                />
+                <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
+                  Email
+                </Text>
+                <TextInput
+                  onChangeText={(text) =>
+                    setformData({
+                      ...formData,
+                      email: text,
+                    })
+                  }
+                  style={styles.input}
+                  textContentType="emailAddress"
+                />
+                <Text style={{ ...styles.inputHeading, ...styles.paddingTop }}>
+                  Phone Number
+                </Text>
                 <TextInput
                   onChangeText={(text) =>
                     setformData({
@@ -123,37 +100,36 @@ export default function Signup({ navigation }) {
                       phone: text,
                     })
                   }
-                  style={{ ...styles.input, ...styles.phoneNumberinput }}
+                  style={styles.input}
                   textContentType="none"
                 />
+                <View style={{ ...styles.passwordDiv }}>
+                  <Text style={{ ...styles.inputHeading }}>Password</Text>
+                </View>
+                <TextInput
+                  onChangeText={(text) =>
+                    setformData({
+                      ...formData,
+                      password: text,
+                    })
+                  }
+                  style={styles.input}
+                  textContentType="password"
+                  secureTextEntry={true}
+                />
               </View>
-              <View style={{ ...styles.passwordDiv }}>
-                <Text style={{ ...styles.inputHeading }}>Password</Text>
-              </View>
-              <TextInput
-                onChangeText={(text) =>
-                  setformData({
-                    ...formData,
-                    password: text,
-                  })
-                }
-                style={styles.input}
-                textContentType="password"
-                secureTextEntry={true}
+              <Button
+                onPress={handleSubmit}
+                title="Signup"
+                buttonStyle={styles.button}
+                titleStyle={styles.buttonText}
               />
             </View>
-            <Button
-              onPress={handleSubmit}
-              title="Signup"
-              buttonStyle={styles.button}
-              titleStyle={styles.buttonText}
-            />
-          </View>
-          <TouchableOpacity onPress={handlePressLogin}>
-            <Text style={styles.touchbutton}>Already a member ? Signin </Text>
-          </TouchableOpacity>
-        </ImageBackground>
-      }
+            <TouchableOpacity onPress={handlePressLogin}>
+              <Text style={styles.touchbutton}>Already a member ? Signin </Text>
+            </TouchableOpacity>
+          </ImageBackground>
+          }
     </ScrollView>
   );
 }
@@ -208,7 +184,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ced4da",
     borderStyle: "solid",
-    borderRadius: 5,
   },
   passwordDiv: {
     display: "flex",
@@ -229,26 +204,5 @@ const styles = StyleSheet.create({
   },
   paddingTop: {
     paddingTop: 10,
-  },
-  option: {
-    backgroundColor: "#f3effd",
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
-    height: 50,
-    marginTop: 5,
-    borderWidth: 1,
-    borderColor: "#ced4da",
-    borderStyle: "solid",
-    borderRadius: 5,
-    width: "25%",
-  },
-  numberDiv: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  phoneNumberinput: {
-    width: "75%",
   },
 });

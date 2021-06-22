@@ -143,10 +143,9 @@ export const phoneOtp = () => async (dispatch) => {
       ? JSON.parse(await _retrieveData("userProfile"))
       : jwt(await _retrieveData("token"));
     const { data } = await api.getPhoneOtp(formData.email);
-    alert("Code is send to your number successfully");
+    alert("Code is send to your email successfully");
     dispatch({ type: PHONE_OTP, data });
   } catch (e) {
-    console.log(e);
     alert(e?.response?.data?.msg);
   }
 };

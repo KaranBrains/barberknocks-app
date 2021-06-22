@@ -12,16 +12,11 @@ import MyAddress from "./address";
 import MyBookings from "./myBookings";
 import Logout from "../screens/logout";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import MyBookings from "./myBookings";
 
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
-  useEffect(() => {
-    AsyncStorage.getItem("token").then((res) => {
-      console.log(res);
-    });
-  });
-
   return (
     <NavigationContainer>
       <Drawer.Navigator>

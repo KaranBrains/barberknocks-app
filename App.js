@@ -10,6 +10,7 @@ import reducers from "./redux/reducer";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
+
 const getFonts = () =>
   Font.loadAsync({
     "font-bold": require("./assets/fonts/AvenirNextLTPro-Bold.otf"),
@@ -21,9 +22,6 @@ const getFonts = () =>
 function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   if (fontsLoaded) {
-    console.log("--------------------------------");
-    console.log("--------------------------------");
-    console.log("Hello");
     return (
       <React.Fragment>
         <Provider store={store}>

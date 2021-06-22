@@ -25,42 +25,19 @@ const dataArray = [
 ];
 export default function Faq() {
   const handleHeader = (item, expanded) => {
-    return (
-      <View
-        style={{
-          flexDirection: "row",
-          padding: 10,
-          justifyContent: "space-between",
-          alignItems: "center",
-          fontFamily: "font-bold",
-          backgroundColor: "#EEEDED",
-          color: "#000",
-        }}
-      >
-        <Text style={{ fontWeight: "600" }}> {item.title}</Text>
-        {expanded ? (
-          <Icon style={{ fontSize: 18 }} name="remove-circle" />
-        ) : (
-          <Icon style={{ fontSize: 18 }} name="add-circle" />
-        )}
-      </View>
-    );
+    <View>
+      <Text>{item.title}</Text>
+    </View>;
   };
   const handleContent = (item, expanded) => {
-    return (
-      <Text
-        style={{
-          fontFamily: "font-medium",
-          backgroundColor: "#FEFEFE",
-          elevation: 3,
-          padding: 10,
-          paddingLeft: 15,
-          paddingRight: 15,
-        }}
-      >
-        {item.content}
-      </Text>
-    );
+    <View style={styles.content}>
+      <Text>{item.content}</Text>
+      {expanded ? (
+        <Icon style={{ fontSize: 18 }} name="remove-circle" />
+      ) : (
+        <Icon style={{ fontSize: 18 }} name="add-circle" />
+      )}
+    </View>;
   };
   return (
     <View
@@ -77,8 +54,10 @@ export default function Faq() {
           animation={true}
           expanded={[0]}
           expandedIcon="remove"
-          renderHeader={handleHeader}
-          renderContent={handleContent}
+          headerStyle={{ ...styles.header }}
+          contentStyle={{ ...styles.content }}
+          // renderHeader={handleHeader}
+          // renderContent={handleContent}
         />
       </Content>
     </View>
@@ -89,7 +68,7 @@ const styles = StyleSheet.create({
   header: {
     fontFamily: "font-bold",
     backgroundColor: "#EEEDED",
-    color: "#000",
+    color: '#000'
   },
   content: {
     fontFamily: "font-medium",
