@@ -1,27 +1,33 @@
 import React, { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "react-native-elements";
-import { StyleSheet, View } from "react-native";
+import { DevSettings, StyleSheet, View } from "react-native";
 
 export default function Logout({ navigation }) {
   const logOut = () => {
     AsyncStorage.removeItem("token").then(() => {
       AsyncStorage.removeItem("userProfile").then(() => {
         alert("Logged out Successfully");
-        navigation.navigate("Home");
+        DevSettings.reload()
+        .then(()=>{
+          navigation.navigate("/home");
+        });
       });
     });
   };
+  useEffect(()=>{
+    logOut();
+  },[])
   return (
     <>
-      <View style={styles.logoutCard}>
+      {/* <View style={styles.logoutCard}>
         <Button
           onPress={logOut}
           title="Logout"
           buttonStyle={styles.button}
           titleStyle={styles.buttonText}
         />
-      </View>
+      </View> */}
     </>
   );
 }

@@ -11,6 +11,7 @@ export default function Service() {
     dispatch(AllStylist());
   }, []);
   const allStylists = useSelector((state) => state.stylist?.AllData?.stylists);
+  console.log(allStylists);
   return (
     <View style={styles.stylists}>
       <Text style={globalStyles.mainHeading}>Expert Stylists</Text>

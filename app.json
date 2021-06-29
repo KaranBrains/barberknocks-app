@@ -11,6 +11,14 @@
     "android": {
       "package": "com.barberKnocks.app",
       "versionCode": 1
-    }
+    },
+    "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+          "enableGooglePay": true
+        }
+      ]
+    ]
   }
 }

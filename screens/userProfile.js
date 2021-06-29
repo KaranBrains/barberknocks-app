@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserByEmail } from "../redux/actions/auth";
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function UserProfile({ navigation }) {
+
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   useEffect(() => {

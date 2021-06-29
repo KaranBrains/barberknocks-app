@@ -7,14 +7,13 @@ import {
 } from "../redux/actions/bookings";
 import { GetStylistById } from "../redux/actions/stylist";
 import { useIsFocused } from "@react-navigation/native";
-import { Button, Card } from "react-native-elements";
+import { Button } from "react-native-elements";
 import {
   StyleSheet,
   View,
   ScrollView,
   Text,
   Dimensions,
-  ActivityIndicator,
   TextInput,
 } from "react-native";
 let ScreenHeight = Dimensions.get("window").height - 70;
@@ -22,19 +21,32 @@ export default function BookingsDetails({ navigation, route }) {
   const initialState = { rating: 0, feedback: "" };
   const [formData, setformData] = useState(initialState);
   const id = route?.params?.id;
-  const stylistId = route?.params?.stylistId;
+  console.log(id);
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   let booking = useSelector((state) => {
-    return state.bookings?.BookingByID?.booking;
+     return (state.bookings?.BookingByID?.booking);
   });
+  console.log(booking);
+  let stylistId;
+  if (booking) {
+    stylistId = booking?.stylist;
+  }
   useEffect(() => {
-    dispatch(GetBookingById(id));
-    dispatch(GetStylistById(stylistId));
+    if (id) {
+      dispatch(GetBookingById(id))
+      .then(()=>{
+        if(stylistId) {
+          dispatch(GetStylistById(stylistId));
+        }
+      });
+    }
   }, [navigation, isFocused, id, stylistId]);
+  console.log(stylist);
   let stylist = useSelector((state) => {
-    return state.stylist?.stylistById?.stylist;
+    return (state.stylist?.stylistById?.stylist)
   });
+
   const provideFeedback = () => {
     dispatch(GiveFeedback(formData, id)).then(() => {
       alert("Feedback Submitted");
@@ -217,9 +229,7 @@ export default function BookingsDetails({ navigation, route }) {
             </View>
           ) : null}
         </View>
-      ) : (
-        <ActivityIndicator size="large" color="#420a83" />
-      )}
+      ) : null}
     </ScrollView>
   );
 }

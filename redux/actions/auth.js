@@ -14,6 +14,7 @@ import {
 } from "../constants";
 import jwt from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DevSettings } from "react-native";
 
 //Store Data
 
@@ -46,10 +47,15 @@ export const signIn = (formData, navigation) => async (dispatch) => {
     dispatch({ type: SIGN_IN, data });
     await _storeData("token", data.token);
     const role = jwt(data.token).role;
-    alert(`You are logged in as ${role}`);
-    navigation.navigate("Home");
+    alert(`You are logged in`);
+    DevSettings.reload()
+    .then(()=>{
+      navigation.navigate("Home");
+    });
   } catch (e) {
-    alert(e?.response?.data?.msg);
+    if (e.response) {
+      alert(e?.response?.data?.msg);
+    }
   }
 };
 
@@ -76,6 +82,7 @@ export const signUp = (formData, navigation) => async (dispatch) => {
 //Add Address
 export const addAddress = (formData, navigation) => async (dispatch) => {
   try {
+    email;
     const user = (await _retrieveData("userProfile"))
       ? JSON.parse(await _retrieveData("userProfile"))
       : jwt(await _retrieveData("token"));
@@ -119,19 +126,19 @@ export const verifyEmailOtp = (otp, navigation) => async (dispatch) => {
   }
 };
 
-export const changePassword = (password) => async (dispatch) => {
+export const changePassword = (formData, navigation) => async (dispatch) => {
   try {
-    const formData = JSON.parse(await _retrieveData("userProfile"));
-    const token = await _retrieveData("token");
+    const email = await _retrieveData("email");
     const body = {
-      email: formData.email,
-      token: token,
-      pass: password,
+      email: email,
+      pass: formData.password,
     };
     const { data } = await api.changePassword(body);
     dispatch({ type: CHANGE_PASSWORD, data });
     alert("Password changed");
+    navigation.navigate("Login");
   } catch (e) {
+    console.log(e?.response?.data);
     alert(e?.response?.data?.msg);
   }
 };
@@ -182,13 +189,16 @@ export const getUserByEmail = () => async (dispatch) => {
   }
 };
 
-export const forgotEmailOtp = (formData) => async (dispatch) => {
+export const forgotEmailOtp = (formData, navigation) => async (dispatch) => {
   try {
     const { data } = await api.getEmailOtp(formData.email);
     await _storeData("email", formData.email);
     alert("Code is send to your email successfully");
+    await _storeData("email", formData.email);
+    navigation.navigate("ForgotOtp");
     dispatch({ type: EMAIL_OTP, data });
   } catch (e) {
+    console.log(e,"hello");
     alert(e?.response?.data?.msg);
   }
 };
@@ -204,12 +214,13 @@ export const getLoggedInUser = () => async (dispatch) => {
   }
 };
 
-export const verifyForgotEmailOtp = (otp) => async (dispatch) => {
+export const verifyForgotEmailOtp = (otp, navigation) => async (dispatch) => {
   try {
     const formData = await _retrieveData("email");
     const { data } = await api.verifyForgotEmailOtp(otp, formData);
     dispatch({ type: VERIFY_FORGOT, data });
     alert("OTP Verified");
+    navigation.navigate("NewPassword");
   } catch (e) {
     alert(e?.response?.data?.msg);
   }

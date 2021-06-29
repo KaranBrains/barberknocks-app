@@ -106,10 +106,9 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "#eee",
-    width: "40%",
+    width: "43%",
     alignSelf: "center",
-    borderRadius: 100,
-    padding: 5,
+    padding: 10,
     margin: 10,
   },
   services: {
@@ -133,6 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
     color: "#333",
+    paddingHorizontal: 10
   },
   header: {
     flex: 1,
@@ -199,7 +199,6 @@ const styles = StyleSheet.create({
   border: {
     borderWidth: 1.5,
     borderColor: "#730fe4",
-    borderRadius: 50,
     padding: 5,
   },
   option: {

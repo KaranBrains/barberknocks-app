@@ -1,25 +1,35 @@
 import React, { useState } from "react";
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from "react-native-simple-radio-button";
+import RadioForm from "react-native-simple-radio-button";
+import { confirmRideCash } from "../redux/actions/ride";
+
 import {
   StyleSheet,
   View,
   Dimensions,
   ImageBackground,
   ScrollView,
-  TouchableOpacity,
   Text,
 } from "react-native";
 import { Button } from "react-native-elements";
+import {AddPayment} from "../redux/actions/payment";
+import { useDispatch } from "react-redux"
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 export default function Payment({ navigation, route }) {
+  const dispatch = useDispatch();
+  const [selected, setSelected] = useState(0)
   const id = route?.params?.id;
   const handleSubmit = () => {
-    navigation.navigate("BookingsDetails", { id });
+    if (selected === 1) {
+      dispatch(AddPayment(id));
+    }
+    if (selected == 0) {
+      dispatch(confirmRideCash(id, navigation));
+    }
+    else{
+      return
+    }
+    // navigation.navigate("BookingDetails", { id });
   };
   const radio_props = [
     { label: "Cash", value: 0 },
@@ -41,9 +51,11 @@ export default function Payment({ navigation, route }) {
                 radio_props={radio_props}
                 buttonInnerColor={"#730fe4"}
                 buttonSize={10}
+                initial={0}
                 buttonOuterSize={25}
                 onPress={(value) => {
-                  console.log(value);
+                  console.log(value)
+                  setSelected(value);
                 }}
               />
               <Button

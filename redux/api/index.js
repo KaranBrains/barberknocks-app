@@ -1,10 +1,10 @@
 import axios from "axios";
 
-// export const url = "http://localhost:8082/api";
-// export const paymentUrl = "http://localhost:8082/api/create-checkout-session";
-// // export const baseUrl = "http://localhost:8082/";
+// export const url = "http://ec2-52-66-4-42.ap-south-1.compute.amazonaws.com:8080/api";
+// export const paymentUrl = "http://ec2-52-66-4-42.ap-south-1.compute.amazonaws.com:8080/api/create-checkout-session";
+// export const baseUrl = "http://ec2-52-66-4-42.ap-south-1.compute.amazonaws.com:8080";
 
-// // export const url = "https://www.pigameapp.com:8081/api";
+// export const url = "https://www.pigameapp.com:8081/api";
 // export const baseUrl = "https://www.pigameapp.com:8081/";
 
 export const url = "https://www.pigameapp.com:8081/api";

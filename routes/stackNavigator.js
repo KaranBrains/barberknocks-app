@@ -94,7 +94,7 @@ function Navigator() {
         })}
       />
       <Stack.Screen
-        name="BookingsDetails"
+        name="BookingDetails"
         component={BookingsDetails}
         options={({ navigation }) => ({
           headerTitle: () => (

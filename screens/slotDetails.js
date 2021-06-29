@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Button, Card } from "react-native-elements";
 import { useSelector } from "react-redux";
-import { StyleSheet, View, ScrollView, Text, Dimensions } from "react-native";
+import { StyleSheet, View, ScrollView, Text, Dimensions ,ImageBackground } from "react-native";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
 
@@ -17,56 +17,59 @@ export default function SlotDetails({ navigation, route }) {
   const slotId = route?.params?.id;
   const allSlots = useSelector((state) => state.slot?.serviceSlot?.slots);
   const handleSubmit = () => {
-    navigation.navigate("SelectAddress", { id: route?.params.id });
+    navigation.navigate("SelectAddress", { id: slotId });
+    console.log("------------------------------");
+    console.log(slotId)
   };
   return (
     <ScrollView>
-      <View style={{ ...styles.header }}>
-        <View style={{ ...styles.bookingsDetailsCard }}>
-          <View style={{ ...styles.bookingsDetailsRow }}>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>Date</Text>
-            <Text
-              style={{
-                ...styles.bookingsDetailsAnswer,
-              }}
-            >
-              {displaySlot?.date}
-            </Text>
+      <ImageBackground
+        source={require("../assets/bg_1.jpg")}
+        style={{ ...styles.header }}
+      >
+          <View style={{ ...styles.bookingsDetailsCard }}>
+            <View style={{ ...styles.bookingsDetailsRow }}>
+              <Text style={{ ...styles.bookingsDetailsAnswer }}>Date</Text>
+              <Text
+                style={{
+                  ...styles.bookingsDetailsAnswer,
+                }}
+              >
+                {displaySlot?.date}
+              </Text>
+            </View>
+            <View style={{ ...styles.bookingsDetailsRow }}>
+              <Text style={{ ...styles.bookingsDetailsAnswer }}>Time</Text>
+              <Text style={{ ...styles.bookingsDetailsAnswer }}>
+                {displaySlot?.time}
+              </Text>
+            </View>
+            <View style={{ ...styles.bookingsDetailsRow }}>
+              <Text style={{ ...styles.bookingsDetailsAnswer }}>Stylist</Text>
+              <Text
+                style={{
+                  ...styles.bookingsDetailsAnswer,
+                  ...styles.statusButton,
+                  ...styles.primary,
+                }}
+              >
+                {displaySlot?.stylistName}
+              </Text>
+            </View>
+            <View style={{ ...styles.bookingsDetailsRow }}>
+              <Text style={{ ...styles.bookingsDetailsAnswer }}>Price</Text>
+              <Text style={{ ...styles.bookingsDetailsAnswer, ...styles.green }}>
+                {displaySlot?.price} USD
+              </Text>
+            </View>
           </View>
-          <View style={{ ...styles.bookingsDetailsRow }}>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>Time</Text>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>
-              {displaySlot?.time}
-            </Text>
-          </View>
-        </View>
-        <View style={{ ...styles.bookingsDetailsCard }}>
-          <View style={{ ...styles.bookingsDetailsRow }}>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>Stylist</Text>
-            <Text
-              style={{
-                ...styles.bookingsDetailsAnswer,
-                ...styles.statusButton,
-                ...styles.primary,
-              }}
-            >
-              {displaySlot?.stylistName}
-            </Text>
-          </View>
-          <View style={{ ...styles.bookingsDetailsRow }}>
-            <Text style={{ ...styles.bookingsDetailsAnswer }}>Price</Text>
-            <Text style={{ ...styles.bookingsDetailsAnswer, ...styles.green }}>
-              {displaySlot?.price} USD
-            </Text>
-          </View>
-        </View>
-        <Button
-          onPress={handleSubmit}
-          title="Continue"
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonText}
-        />
-      </View>
+          <Button
+            onPress={handleSubmit}
+            title="Continue"
+            buttonStyle={styles.button}
+            titleStyle={styles.buttonText}
+          />
+      </ImageBackground>
     </ScrollView>
   );
 }
@@ -95,6 +98,7 @@ const styles = StyleSheet.create({
   },
   bookingsDetailsCard: {
     paddingTop: 15,
+    backgroundColor: "#ffffff",
     paddingBottom: 15,
     margin: "auto",
     borderWidth: 1,

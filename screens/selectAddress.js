@@ -13,32 +13,31 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserByEmail } from "../redux/actions/auth";
+import { useIsFocused } from "@react-navigation/native";
 
 let ScreenHeight = Dimensions.get("window").height - 70;
+
 export default function SelectAddress({ navigation, route }) {
+  const isFocused = useIsFocused();
   const [address, setAddress] = useState([]);
   const [val, setVal] = useState("");
   const dispatch = useDispatch();
   const handlePress = () => {
     navigation.navigate("AddAddress", { id: val });
   };
+  const _storeData = async (key, value) => {
+    try {
+      await AsyncStorage.setItem(key, value);
+    } catch (error) {
+      alert("Error saving data");
+    }
+  };
   useEffect(() => {
     dispatch(getUserByEmail());
-  }, [navigation]);
-
-  const radio_props = [
-    { label: "param1", value: 0 },
-    { label: "param2", value: 1 },
-  ];
-  const handleSubmit = () => {
-    navigation.navigate("Payment", { id: route?.params.id });
-  };
-  let user = useSelector((state) => state.main?.authData?.user);
-  let a = [];
-  useEffect(() => {
     user?.address?.map((add) => {
       add &&
         a.push({
@@ -47,7 +46,13 @@ export default function SelectAddress({ navigation, route }) {
         });
     });
     setAddress(a);
-  }, []);
+  }, [navigation, user,isFocused]);
+  const handleSubmit = () => {
+    navigation.navigate("Payment", { id: route?.params?.id });
+    console.log(route?.params?.id)
+  };
+  let user = useSelector((state) => state.main?.authData?.user);
+  let a = [];
   return (
     <View>
       <ScrollView>
@@ -67,6 +72,8 @@ export default function SelectAddress({ navigation, route }) {
                 buttonOuterSize={20}
                 onPress={(value) => {
                   setVal(value);
+                  _storeData("address", value);
+                  console.log(value)
                 }}
               />
               {!user && <Text style={styles.noSlots}>No address</Text>}
