@@ -52,6 +52,7 @@ export const signIn = (formData, navigation) => async (dispatch) => {
     .then(()=>{
       navigation.navigate("Home");
     });
+    // navigation.navigate("Home");
   } catch (e) {
     if (e.response) {
       alert(e?.response?.data?.msg);

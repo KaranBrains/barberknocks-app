@@ -33,7 +33,7 @@ export default function Service({ navigation }) {
               </Card>
             )
         )}
-        <Card containerStyle={styles.card}>
+        <Card containerStyle={styles.moreCard}>
           <TouchableOpacity onPress={handlePress}>
             <Text style={styles.heading}>More...</Text>
           </TouchableOpacity>
@@ -48,7 +48,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
     width: "26%",
     alignSelf: "center",
-    borderRadius: 100,
+    height: 100
+  },
+  moreCard: {
+    backgroundColor: "#eee",
+    width: "26%",
+    alignSelf: "center",
+    height: 100,
+    paddingTop: 30
   },
   services: {
     backgroundColor: "#fff",

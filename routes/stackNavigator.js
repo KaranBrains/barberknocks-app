@@ -10,6 +10,7 @@ import SelectAddress from "../screens/selectAddress";
 import AddAddress from "../screens/addAddress";
 import Payment from "../screens/Payment";
 import BookingsDetails from "../screens/bookingsDetails";
+import Stripe from "../screens/Stripe";
 
 const Stack = createStackNavigator();
 
@@ -89,6 +90,17 @@ function Navigator() {
           headerTitle: () => (
             <React.Fragment>
               <StackHeader navigation={navigation} title="Payment" />
+            </React.Fragment>
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Stripe"
+        component={Stripe}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <React.Fragment>
+              <StackHeader navigation={navigation} title="Stripe" />
             </React.Fragment>
           ),
         })}

@@ -8,6 +8,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 export default function Slots({ navigation, route }) {
   const [date, setDate] = useState("");
+  const [month, setMonth] = useState("");
   const [displaySlots, setDisplaySlots] = useState([]);
   const [displayStylists, setDisplayStylists] = useState(null);
   const [slotId, setSlotId] = useState("");
@@ -43,11 +44,11 @@ export default function Slots({ navigation, route }) {
   };
   const today = new Date();
 
-  const handlePress = (date) => {
+  const handlePress = (date,month) => {
     setDisplaySlots([]);
     setDisplayStylists();
     allSlots.map((slot) => {
-      if (new Date(slot.date).getDate() === date) {
+      if (new Date(slot.date).getDate() === date && new Date(slot.date).getMonth() === month) {
         setDisplaySlots((prevState) => [...prevState, slot]);
       }
     });
@@ -67,21 +68,24 @@ export default function Slots({ navigation, route }) {
         .getDay()
         .toString(),
       date: new Date(today.getTime() + i * 24 * 60 * 60 * 1000).getDate(),
+      month: new Date(today.getTime() + i * 24 * 60 * 60 * 1000).getMonth(),
+      year: new Date(today.getTime() + i * 24 * 60 * 60 * 1000).getFullYear(),
     });
   }
   return (
     <ScrollView>
       <View>
-        <Text style={styles.headDate}>{date}</Text>
+        <Text style={styles.headDate}>{date + month }</Text>
         <ScrollView horizontal={true}>
           <View style={styles.calendar}>
-            {weekDates.map(({ date, day }) => (
+            {weekDates.map(({ date, day ,month,year}) => (
               <View style={styles.dayDateContainer}>
                 <Text style={styles.day}>{getDay(day)}</Text>
                 <TouchableOpacity
                   onPress={() => {
-                    handlePress(date);
-                    setDate(date);
+                    handlePress(date,month-1);
+                    setDate(date + '-');
+                    setMonth((month+1) + '-' + year);
                   }}
                 >
                   <View style={date && styles.dateFocus}>

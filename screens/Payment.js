@@ -21,7 +21,7 @@ export default function Payment({ navigation, route }) {
   const id = route?.params?.id;
   const handleSubmit = () => {
     if (selected === 1) {
-      dispatch(AddPayment(id));
+      navigation.navigate("Stripe", { id });
     }
     if (selected == 0) {
       dispatch(confirmRideCash(id, navigation));

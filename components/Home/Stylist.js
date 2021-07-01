@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     borderRadius: 400,
   },
   stylistCard: {
-    borderRadius: 400,
     width: "26%",
     alignSelf: "center",
   },

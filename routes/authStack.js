@@ -6,6 +6,7 @@ import StackHeader from "../components/StackHeader";
 import ForgotEmail from "../screens/ForgotPassword/Email";
 import ForgotOtp from "../screens/ForgotPassword/Otp";
 import NewPassword from "../screens/ForgotPassword/newPassword";
+import LoginHeader from "../components/LoginHeader";
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,7 @@ function Navigator() {
         options={({ navigation }) => ({
           headerTitle: () => (
             <React.Fragment>
-              <Header navigation={navigation} title="Login" />
+              <LoginHeader navigation={navigation} title="Login" />
             </React.Fragment>
           ),
         })}

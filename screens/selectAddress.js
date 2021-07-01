@@ -26,6 +26,8 @@ export default function SelectAddress({ navigation, route }) {
   const [address, setAddress] = useState([]);
   const [val, setVal] = useState("");
   const dispatch = useDispatch();
+  let user = useSelector((state) => state.main?.authData?.user);
+  let a = [];
   const handlePress = () => {
     navigation.navigate("AddAddress", { id: val });
   };
@@ -38,21 +40,22 @@ export default function SelectAddress({ navigation, route }) {
   };
   useEffect(() => {
     dispatch(getUserByEmail());
-    user?.address?.map((add) => {
-      add &&
-        a.push({
-          label: `${add.street} ${add.city} ${add.postalCode} ${add.province}`,
-          value: `${add._id}`,
-        });
-    });
-    setAddress(a);
+    if (user && user.address.length>0) {
+      user?.address?.map((add) => {
+        add &&
+          a.push({
+            label: `${add.street} ${add.city} ${add.postalCode} ${add.province}`,
+            value: `${add._id}`,
+          });
+      });
+      setAddress(a);
+      console.log(address);
+    }
   }, [navigation, user,isFocused]);
   const handleSubmit = () => {
     navigation.navigate("Payment", { id: route?.params?.id });
     console.log(route?.params?.id)
   };
-  let user = useSelector((state) => state.main?.authData?.user);
-  let a = [];
   return (
     <View>
       <ScrollView>

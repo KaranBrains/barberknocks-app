@@ -27,7 +27,7 @@ const Footer = ({ navigation }) => {
           },
           {
             title: "Inquiries",
-            data: ["Become a Stylist", "General Enquiries"],
+            data: ["General Enquiries"],
           },
         ]}
         renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
